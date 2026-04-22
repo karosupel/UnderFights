@@ -18,7 +18,6 @@ public class BoxScript : MonoBehaviour
     }
     void Update()
     {
-        //left_collider.offset = new Vector2(left_collider.offset.x + sprite.size.x/2, left_collider.offset.y + sprite.size.y/2);
         left_collider.size = new Vector2(thickness, sprite.size.y);
         left_collider.offset = new Vector2(-sprite.size.x / 2 + thickness / 2, 0);
 
