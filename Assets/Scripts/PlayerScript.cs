@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerScript : MonoBehaviour, IDamageable
 {   
@@ -14,6 +15,7 @@ public class PlayerScript : MonoBehaviour, IDamageable
     //to delete this later v
     public float health;
     public Slider slider;
+    public TextMeshProUGUI hpValueText;
 
 
     void Start()
@@ -21,6 +23,7 @@ public class PlayerScript : MonoBehaviour, IDamageable
         health = maxHealth;
         slider.maxValue = maxHealth;
         slider.value = health;
+        hpValueText.text = health.ToString() + "/" + maxHealth.ToString();
     }
 
     void Update()
@@ -45,5 +48,6 @@ public class PlayerScript : MonoBehaviour, IDamageable
     {
         health -= amount;
         slider.value = health;
+        hpValueText.text = health.ToString() + "/" + maxHealth.ToString();
     }
 }
