@@ -23,6 +23,11 @@ public class BoxScript : MonoBehaviour
     {
         sprite = GetComponent<SpriteRenderer>();
     }
+
+    void Start()
+    {
+        UpdateColliders();
+    }
     void Update()
     {
        if(Input.GetKeyDown(KeyCode.K))

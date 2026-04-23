@@ -1291,6 +1291,10 @@ MonoBehaviour:
   down_collider: {fileID: 1409736690}
   up_collider: {fileID: 1409736691}
   thickness: 0.02
+  final_pos_x: 0
+  final_pos_y: -3
+  final_size_x: 3.5
+  final_size_y: 0.7
 --- !u!61 &1409736690
 BoxCollider2D:
   m_ObjectHideFlags: 0
