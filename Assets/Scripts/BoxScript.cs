@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class BoxScript : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] SpriteRenderer sprite;
     [SerializeField] BoxCollider2D left_collider;
     [SerializeField] BoxCollider2D right_collider;
     [SerializeField] BoxCollider2D down_collider;
     [SerializeField] BoxCollider2D up_collider;
 
+    [Header("Parameters")]
     [SerializeField] float thickness;
+
+    [SerializeField] float final_pos_x;
+    [SerializeField] float final_pos_y;
+    [SerializeField] float final_size_x;
+    [SerializeField] float final_size_y;
 
     void Awake()
     {
@@ -18,6 +25,50 @@ public class BoxScript : MonoBehaviour
     }
     void Update()
     {
+       if(Input.GetKeyDown(KeyCode.K))
+        {
+            SmoothResize(new Vector2(final_pos_x,final_pos_y), new Vector2(final_size_x,final_size_y),1f);
+        } 
+    }
+
+
+    public void SmoothResize(Vector2 finalPosition, Vector2 finalSize, float duration)
+    {
+        StartCoroutine(SmoothResizeCoroutine(finalPosition, finalSize, duration));
+    }
+
+    IEnumerator SmoothResizeCoroutine(Vector2 finalPosition, Vector2 finalSize, float duration)
+    {
+        Vector2 startPosition = transform.position;
+        Vector2 startSize = sprite.size;
+
+        float time = 0f;
+
+        while (time < duration)
+        {
+            float t = time / duration;
+
+            //t = Mathf.SmoothStep(0f, 1f, t);
+            t = 1 - Mathf.Pow(1 - t, 3);
+
+            transform.position = Vector2.Lerp(startPosition, finalPosition, t);
+            sprite.size = Vector2.Lerp(startSize, finalSize, t);
+
+            UpdateColliders();
+
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        // final one to avoid floats mistakes
+        transform.position = finalPosition;
+        sprite.size = finalSize;
+        UpdateColliders();
+    }
+
+    void UpdateColliders()
+    {
+        //taking care of colliders to match the size of the box
         left_collider.size = new Vector2(thickness, sprite.size.y);
         left_collider.offset = new Vector2(-sprite.size.x / 2 + thickness / 2, 0);
 
