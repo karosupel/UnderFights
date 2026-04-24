@@ -11,13 +11,11 @@ public class BoxScript : MonoBehaviour
     [SerializeField] BoxCollider2D down_collider;
     [SerializeField] BoxCollider2D up_collider;
 
-    [Header("Parameters")]
     [SerializeField] float thickness;
-
-    [SerializeField] float final_pos_x;
-    [SerializeField] float final_pos_y;
-    [SerializeField] float final_size_x;
-    [SerializeField] float final_size_y;
+    float final_pos_x;
+    float final_pos_y;
+    float final_size_x;
+    float final_size_y;
 
     void Awake()
     {
@@ -30,10 +28,7 @@ public class BoxScript : MonoBehaviour
     }
     void Update()
     {
-       if(Input.GetKeyDown(KeyCode.K))
-        {
-            SmoothResize(new Vector2(final_pos_x,final_pos_y), new Vector2(final_size_x,final_size_y),1f);
-        } 
+       
     }
 
 
