@@ -612,13 +612,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 736371689}
+  - component: {fileID: 736371690}
   m_Layer: 0
   m_Name: Damage Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &736371689
 Transform:
   m_ObjectHideFlags: 0
@@ -637,6 +638,21 @@ Transform:
   - {fileID: 175424876}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &736371690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736371688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0813f549e3346d64c9a519e971bc385a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 0}
+  perfectOffset: 0.5
+  missThreshold: 0.9
 --- !u!1 &759046072
 GameObject:
   m_ObjectHideFlags: 0
