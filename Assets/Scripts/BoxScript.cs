@@ -31,6 +31,12 @@ public class BoxScript : MonoBehaviour
        
     }
 
+    public void Resize(Vector2 finalPosition, Vector2 finalSize)
+    {
+        transform.position = new Vector3(finalPosition.x, finalPosition.y, 0);
+        sprite.size = finalSize;
+    }
+
 
     public void SmoothResize(Vector2 finalPosition, Vector2 finalSize, float duration)
     {
