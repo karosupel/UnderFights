@@ -15,11 +15,9 @@ public class MainManagerScript : MonoBehaviour
 
     [Header("DamagePanel")]
     [SerializeField] GameObject DamagePanel;
-    private GameObject slider;
-    private SliderScript sliderScript;
-    private Canvas damagePanelCanvas;
-    [SerializeField] Vector2 panel_position;
-    [SerializeField] Vector2 panel_size;
+    private DamagePanelScript damagePanelScript;
+    [SerializeField] public Vector2 panel_position;
+    [SerializeField] public Vector2 panel_size;
 
     void Awake()
     {
@@ -38,9 +36,8 @@ public class MainManagerScript : MonoBehaviour
     void Start()
     {
         boxScript = box.GetComponent<BoxScript>();
-        slider = DamagePanel.transform.GetChild(0).gameObject;
-        sliderScript = slider.GetComponent<SliderScript>();
-        damagePanelCanvas = DamagePanel.GetComponentInChildren<Canvas>();
+        damagePanelScript = DamagePanel.GetComponent<DamagePanelScript>();
+        DamagePanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -50,26 +47,17 @@ public class MainManagerScript : MonoBehaviour
         {
             TransformToDamagePanel(transitionDuration);
         } 
+
+        if(Input.GetKeyDown(KeyCode.Mouse0) && DamagePanel.activeSelf)
+        {
+            Debug.Log("Multiplier: " + damagePanelScript.GetMultiplier());
+        }
     }
 
     public void TransformToDamagePanel(float timeDuration)
     {
         player.SetActive(false);
         boxScript.Resize(panel_position, panel_size);
-        RectTransform rt = damagePanelCanvas.GetComponent<RectTransform>();
-        rt.sizeDelta = panel_size * 7f;
-        
-        // boxScript.SmoothResize(panel_position, panel_size, timeDuration); //resizing box to destination value
-        // yield return new WaitForSeconds(timeDuration);
-
-        //resizing and activating the slider:
-        slider.transform.localScale = new Vector3(0.2f, panel_size.y * 7f, 0f); 
-        slider.SetActive(true); 
-
-        //setting final points to slider:
-        sliderScript.pointA = panel_position - new Vector2(panel_size.x/2*7,0);
-        sliderScript.pointB = panel_position + new Vector2(panel_size.x/2*7,0);
-
         DamagePanel.SetActive(true);
     }
 }
