@@ -49,9 +49,9 @@ public class MainManagerScript : MonoBehaviour
 
         //setting the main panel active
         DamagePanel.SetActive(false);
-        boxScript.Resize(panel_position, panel_size);
-        player.SetActive(false);
-        mainPanelScript.StartTyping("* The air is filled with the smell of pudding");
+        // boxScript.Resize(panel_position, panel_size);
+        // player.SetActive(false);
+        // mainPanelScript.StartTyping("* The air is filled with the smell of pudding");
     }
 
     // Update is called once per frame
