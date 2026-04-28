@@ -19,6 +19,14 @@ public class MainManagerScript : MonoBehaviour
     [SerializeField] public Vector2 panel_position;
     [SerializeField] public Vector2 panel_size;
 
+    [Header("MainPanel")]
+    [SerializeField] GameObject MainPanel;
+    private MainPanelScript mainPanelScript;
+
+    [Header("FightPanel")]
+    [SerializeField] public Vector2 f_panel_position;
+    [SerializeField] public Vector2 f_panel_size;
+
     void Awake()
     {
         if(Instance == null)
@@ -37,11 +45,13 @@ public class MainManagerScript : MonoBehaviour
     {
         boxScript = box.GetComponent<BoxScript>();
         damagePanelScript = DamagePanel.GetComponent<DamagePanelScript>();
+        mainPanelScript = MainPanel.GetComponent<MainPanelScript>();
 
         //setting the main panel active
         DamagePanel.SetActive(false);
         boxScript.Resize(panel_position, panel_size);
         player.SetActive(false);
+        mainPanelScript.StartTyping("* The air is filled with the smell of pudding");
     }
 
     // Update is called once per frame
@@ -49,7 +59,12 @@ public class MainManagerScript : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.K))
         {
-            TransformToDamagePanel();
+            TransformToFightPanel();
+        } 
+
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            StartCoroutine(TransformToMainPanel("* Suddenly you became very hungry..."));
         } 
 
         if(Input.GetKeyDown(KeyCode.Mouse0) && DamagePanel.activeSelf)
@@ -60,8 +75,29 @@ public class MainManagerScript : MonoBehaviour
 
     public void TransformToDamagePanel()
     {
+        MainPanel.SetActive(false);
         player.SetActive(false);
         boxScript.Resize(panel_position, panel_size);
         DamagePanel.SetActive(true);
+    }
+
+    public IEnumerator TransformToMainPanel(string Text)
+    {
+        DamagePanel.SetActive(false);
+        player.SetActive(false);
+
+        boxScript.SmoothResize(panel_position, panel_size, transitionDuration);
+        yield return new WaitForSeconds(transitionDuration);
+
+        MainPanel.SetActive(true);
+        mainPanelScript.StartTyping(Text);
+    }
+
+    public void TransformToFightPanel()
+    {
+        player.SetActive(true);
+        boxScript.SmoothResize(f_panel_position, f_panel_size, transitionDuration);
+        DamagePanel.SetActive(false);
+        MainPanel.SetActive(false);
     }
 }
