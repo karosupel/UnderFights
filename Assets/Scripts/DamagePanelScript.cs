@@ -20,18 +20,20 @@ public class DamagePanelScript : MonoBehaviour
         slider = transform.GetChild(0).gameObject;
         damagePanelCanvas = gameObject.GetComponentInChildren<Canvas>();
         sliderScript = slider.GetComponent<SliderScript>();
+
     }
     void Start()
     {
         panel_position = MainManagerScript.Instance.panel_position;
         panel_size = MainManagerScript.Instance.panel_size;
 
-        //setting everything to match panel size:
-        slider.transform.localScale = new Vector3(0.2f, panel_size.y * 7f, 0f); 
-        slider.SetActive(true); 
-
         sliderScript.pointA = panel_position - new Vector2(panel_size.x/2*7,0);
         sliderScript.pointB = panel_position + new Vector2(panel_size.x/2*7,0);
+
+        //setting everything to match panel size:
+        slider.transform.position = sliderScript.pointA;
+        slider.transform.localScale = new Vector3(0.2f, panel_size.y * 7f, 0f); 
+        slider.SetActive(true);
 
         RectTransform rt = damagePanelCanvas.GetComponent<RectTransform>();
         rt.sizeDelta = panel_size * 7f;

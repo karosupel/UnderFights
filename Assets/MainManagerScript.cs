@@ -37,7 +37,11 @@ public class MainManagerScript : MonoBehaviour
     {
         boxScript = box.GetComponent<BoxScript>();
         damagePanelScript = DamagePanel.GetComponent<DamagePanelScript>();
+
+        //setting the main panel active
         DamagePanel.SetActive(false);
+        boxScript.Resize(panel_position, panel_size);
+        player.SetActive(false);
     }
 
     // Update is called once per frame
@@ -45,7 +49,7 @@ public class MainManagerScript : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.K))
         {
-            TransformToDamagePanel(transitionDuration);
+            TransformToDamagePanel();
         } 
 
         if(Input.GetKeyDown(KeyCode.Mouse0) && DamagePanel.activeSelf)
@@ -54,7 +58,7 @@ public class MainManagerScript : MonoBehaviour
         }
     }
 
-    public void TransformToDamagePanel(float timeDuration)
+    public void TransformToDamagePanel()
     {
         player.SetActive(false);
         boxScript.Resize(panel_position, panel_size);

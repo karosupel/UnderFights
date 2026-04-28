@@ -13,7 +13,7 @@ public class SliderScript : MonoBehaviour
     
     void Start()
     {
-        transform.position = pointA;
+        //transform.position = pointA;
         nextPosition = pointB;
     }
 
