@@ -3098,6 +3098,7 @@ GameObject:
   - component: {fileID: 1589191514}
   - component: {fileID: 1589191513}
   - component: {fileID: 1589191515}
+  - component: {fileID: 1589191516}
   m_Layer: 0
   m_Name: PonPonPurin
   m_TagString: Untagged
@@ -3188,6 +3189,24 @@ MonoBehaviour:
   health: 0
   slider: {fileID: 1624676775}
   hpValueText: {fileID: 1075085390}
+--- !u!114 &1589191516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589191512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6985f6c6473fdd49b84c0b61cee5c11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodPrefab: {fileID: 3120162208727291844, guid: a8b0d3381ed3f9f45a5da83ba8e76802, type: 3}
+  foodSpawnPoints:
+  - {x: -4, y: 2, z: 0}
+  - {x: -2, y: 2, z: 0}
+  - {x: 2, y: 2, z: 0}
+  - {x: 4, y: 2, z: 0}
 --- !u!1 &1617680867
 GameObject:
   m_ObjectHideFlags: 0
@@ -4108,63 +4127,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2033155289}
   m_CullTransparentMesh: 1
---- !u!1001 &7481641787604342176
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3026791779945029347, guid: 35f8ff8ccc201994f9ede08b3799b388, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 3026791779945029347, guid: 35f8ff8ccc201994f9ede08b3799b388, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.13
-      objectReference: {fileID: 0}
-    - target: {fileID: 3026791779945029347, guid: 35f8ff8ccc201994f9ede08b3799b388, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3026791779945029347, guid: 35f8ff8ccc201994f9ede08b3799b388, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3026791779945029347, guid: 35f8ff8ccc201994f9ede08b3799b388, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3026791779945029347, guid: 35f8ff8ccc201994f9ede08b3799b388, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3026791779945029347, guid: 35f8ff8ccc201994f9ede08b3799b388, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3026791779945029347, guid: 35f8ff8ccc201994f9ede08b3799b388, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3026791779945029347, guid: 35f8ff8ccc201994f9ede08b3799b388, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3026791779945029347, guid: 35f8ff8ccc201994f9ede08b3799b388, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8007773807884318644, guid: 35f8ff8ccc201994f9ede08b3799b388, type: 3}
-      propertyPath: m_Name
-      value: Food
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 35f8ff8ccc201994f9ede08b3799b388, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -4179,4 +4141,3 @@ SceneRoots:
   - {fileID: 736371689}
   - {fileID: 1372146480}
   - {fileID: 728041196}
-  - {fileID: 7481641787604342176}

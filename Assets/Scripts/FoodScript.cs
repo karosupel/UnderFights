@@ -18,6 +18,6 @@ public class FoodScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = transform.position + direction * speed * Time.deltaTime;
+        transform.position = transform.position + direction.normalized * speed * Time.deltaTime;
     }
 }
