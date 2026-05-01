@@ -5,19 +5,22 @@ using UnityEngine;
 public class ShockwaveScript : MonoBehaviour
 {
     public Material mat;
-    public float speed = 1f;
-    public float thickness = 0.1f;
-    public float maxRadius = 5f;
-    public float minRadius = 0f;
-
-    public GameObject player;
+    public float speed;
+    public float thickness;
+    public float maxRadius;
+    public float minRadius;
+    private GameObject player;
     // Start is called before the first frame update
     void Start()
     {
+        mat = GetComponent<SpriteRenderer>().material;
+
         mat.SetFloat("_HoleStart", 0.2f);
         mat.SetFloat("_HoleEnd", 1f);
         mat.SetFloat("_Radius", 0);
         mat.SetFloat("_Thickness", thickness);
+
+        player = MainManagerScript.Instance.player;
     }
 
     void Update()
@@ -56,14 +59,6 @@ public class ShockwaveScript : MonoBehaviour
         float holeEnd = mat.GetFloat("_HoleEnd");
 
         bool inHole = angle > holeStart && angle < holeEnd;
-        // if (inHole)
-        // {
-        //     Debug.Log("Player is in hole");
-        // }
-        // if(inHalf)
-        // {
-        //     Debug.Log("Player is in half");
-        // }
         if(inRing && inHalf && !inHole)
         {
             Debug.Log("Player is hit");

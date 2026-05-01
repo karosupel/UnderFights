@@ -9,11 +9,24 @@ public class PurinAttacksScript : MonoBehaviour
     [SerializeField] private List<Vector3> foodSpawnPoints;
 
     [Header("Second Attack")]
-    [SerializeField] public GameObject segmentPrefab;
+    [SerializeField] public GameObject shockwavePrefab;
+
+    private ShockwaveScript shockwaveScript;
+
+    [SerializeField] float speed;
+    [SerializeField] float thickness;
+    [SerializeField] float maxRadius;
+
+    private float HoleStart = 0.2f;
+    private float HoleEnd = 1f;
     // Start is called before the first frame update
     void Start()
     {
+        shockwaveScript = shockwavePrefab.GetComponent<ShockwaveScript>();
         
+        shockwaveScript.speed = speed;
+        shockwaveScript.thickness = thickness;
+        shockwaveScript.maxRadius = maxRadius;
     }
 
     // Update is called once per frame
@@ -26,7 +39,8 @@ public class PurinAttacksScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.G))
         {
-            StartCoroutine(SchockwaveAttack());
+            Vector3 spawnPoint = new Vector3(transform.position.x,transform.position.y-2,0);
+            Instantiate(shockwavePrefab, spawnPoint, Quaternion.Euler(0,0,180));
         }
     }
 
