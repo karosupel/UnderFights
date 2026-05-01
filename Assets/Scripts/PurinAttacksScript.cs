@@ -7,6 +7,9 @@ public class PurinAttacksScript : MonoBehaviour
     [Header("First Attack")]
     [SerializeField] public GameObject foodPrefab;
     [SerializeField] private List<Vector3> foodSpawnPoints;
+
+    [Header("Second Attack")]
+    [SerializeField] public GameObject segmentPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +22,11 @@ public class PurinAttacksScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             StartCoroutine(FoodAttack(4));
+        }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            StartCoroutine(SchockwaveAttack());
         }
     }
 
@@ -55,5 +63,25 @@ public class PurinAttacksScript : MonoBehaviour
     public void AddSpawnPoint(List<Vector3> newSpawnPoint)
     {
         foodSpawnPoints.AddRange(newSpawnPoint);
+    }
+
+    public IEnumerator SchockwaveAttack()
+    {
+        // wersja z segmentami:
+        // int segments = 8;
+        // float radius = 3f;
+
+        // for (int i = 0; i < segments; i++)
+        // {
+        //     float angle = Mathf.Lerp(0, -Mathf.PI, (float)i / (segments - 1));
+
+        //     Vector2 pos = new Vector2(
+        //         Mathf.Cos(angle),
+        //         Mathf.Sin(angle)
+        //     ) * radius;
+        //     Instantiate(segmentPrefab, pos, Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg - 90));
+        // }
+        // yield return new WaitForSeconds(0.1f);
+        yield return null;
     }
 }
