@@ -16,6 +16,7 @@ public class PurinAttacksScript : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float thickness;
     [SerializeField] float maxRadius;
+    [SerializeField] float holeLength;
 
     private float HoleStart = 0.2f;
     private float HoleEnd = 1f;
@@ -39,8 +40,7 @@ public class PurinAttacksScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.G))
         {
-            Vector3 spawnPoint = new Vector3(transform.position.x,transform.position.y-2,0);
-            Instantiate(shockwavePrefab, spawnPoint, Quaternion.Euler(0,0,180));
+            StartCoroutine(SchockwaveAttack());
         }
     }
 
@@ -81,21 +81,12 @@ public class PurinAttacksScript : MonoBehaviour
 
     public IEnumerator SchockwaveAttack()
     {
-        // wersja z segmentami:
-        // int segments = 8;
-        // float radius = 3f;
-
-        // for (int i = 0; i < segments; i++)
-        // {
-        //     float angle = Mathf.Lerp(0, -Mathf.PI, (float)i / (segments - 1));
-
-        //     Vector2 pos = new Vector2(
-        //         Mathf.Cos(angle),
-        //         Mathf.Sin(angle)
-        //     ) * radius;
-        //     Instantiate(segmentPrefab, pos, Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg - 90));
-        // }
-        // yield return new WaitForSeconds(0.1f);
+        Vector3 spawnPoint = new Vector3(transform.position.x,transform.position.y-2,0);
+        HoleStart = Random.Range(0f, 2f);
+        HoleEnd = HoleStart + holeLength;
+        shockwaveScript.mat.SetFloat("_HoleStart", HoleStart);
+        shockwaveScript.mat.SetFloat("_HoleEnd", HoleEnd);
+        Instantiate(shockwavePrefab, spawnPoint, Quaternion.Euler(0,0,180));
         yield return null;
     }
 }

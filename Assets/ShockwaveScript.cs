@@ -15,8 +15,8 @@ public class ShockwaveScript : MonoBehaviour
     {
         mat = GetComponent<SpriteRenderer>().material;
 
-        mat.SetFloat("_HoleStart", 0.2f);
-        mat.SetFloat("_HoleEnd", 1f);
+        //mat.SetFloat("_HoleStart", 0.2f);
+        //mat.SetFloat("_HoleEnd", 1f);
         mat.SetFloat("_Radius", 0);
         mat.SetFloat("_Thickness", thickness);
 
