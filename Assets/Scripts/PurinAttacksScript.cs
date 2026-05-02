@@ -17,6 +17,7 @@ public class PurinAttacksScript : MonoBehaviour
     [SerializeField] float thickness;
     [SerializeField] float maxRadius;
     [SerializeField] float holeLength;
+    [SerializeField] float time;
 
     private float HoleStart = 0.2f;
     private float HoleEnd = 1f;
@@ -40,7 +41,7 @@ public class PurinAttacksScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.G))
         {
-            StartCoroutine(SchockwaveAttack(4));
+            StartCoroutine(SchockwaveAttack(4, time));
         }
     }
 
@@ -79,17 +80,17 @@ public class PurinAttacksScript : MonoBehaviour
         foodSpawnPoints.AddRange(newSpawnPoint);
     }
 
-    public IEnumerator SchockwaveAttack(int numberOfAttacks)
+    public IEnumerator SchockwaveAttack(int numberOfAttacks, float timeBetweenAttacks )
     {
         for(int i=0; i<numberOfAttacks; i++)
         {
             Vector3 spawnPoint = new Vector3(transform.position.x,transform.position.y-2,0);
-            HoleStart = Random.Range(0f, 2f); //TODO: improva randomization
+            HoleStart = Random.Range(0.5f, 1.5f); //TODO: improva randomization
             HoleEnd = HoleStart + holeLength;
             shockwaveScript.mat.SetFloat("_HoleStart", HoleStart);
             shockwaveScript.mat.SetFloat("_HoleEnd", HoleEnd);
             Instantiate(shockwavePrefab, spawnPoint, Quaternion.Euler(0,0,180));
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(timeBetweenAttacks);
         }
     }
 }

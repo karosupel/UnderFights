@@ -9,6 +9,8 @@ public class ShockwaveScript : MonoBehaviour
     public float thickness;
     public float maxRadius;
     public float minRadius;
+
+    public float lifeTime = 5f;
     private GameObject player;
     // Start is called before the first frame update
     void Start()
@@ -21,6 +23,8 @@ public class ShockwaveScript : MonoBehaviour
         mat.SetFloat("_Thickness", thickness);
 
         player = MainManagerScript.Instance.player;
+
+        Destroy(gameObject, lifeTime);
     }
 
     void Update()
