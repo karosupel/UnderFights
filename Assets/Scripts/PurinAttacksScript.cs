@@ -18,6 +18,7 @@ public class PurinAttacksScript : MonoBehaviour
     [SerializeField] float maxRadius;
     [SerializeField] float holeLength;
     [SerializeField] float time;
+    [SerializeField] int numberOfAttacks;
 
     private float HoleStart = 0.2f;
     private float HoleEnd = 1f;
@@ -41,7 +42,7 @@ public class PurinAttacksScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.G))
         {
-            StartCoroutine(SchockwaveAttack(4, time));
+            StartCoroutine(SchockwaveAttack(numberOfAttacks, time));
         }
     }
 
@@ -85,12 +86,38 @@ public class PurinAttacksScript : MonoBehaviour
         for(int i=0; i<numberOfAttacks; i++)
         {
             Vector3 spawnPoint = new Vector3(transform.position.x,transform.position.y-2,0);
-            HoleStart = Random.Range(0.5f, 1.5f); //TODO: improva randomization
+            GeneratePositions();
+            HoleStart = holePositions[i];
             HoleEnd = HoleStart + holeLength;
             shockwaveScript.mat.SetFloat("_HoleStart", HoleStart);
             shockwaveScript.mat.SetFloat("_HoleEnd", HoleEnd);
             Instantiate(shockwavePrefab, spawnPoint, Quaternion.Euler(0,0,180));
             yield return new WaitForSeconds(timeBetweenAttacks);
+        }
+    }
+
+    List<float> holePositions = new List<float>();
+
+    void GeneratePositions() //shuffle random
+    {
+        holePositions.Clear();
+        
+        int count = numberOfAttacks;
+        float start = 0.5f;
+        float step = 0.1f;
+
+        for (int i = 0; i < count; i++)
+        {
+            holePositions.Add(start + i * step);
+        }
+
+        // shuffle
+        for (int i = 0; i < holePositions.Count; i++)
+        {
+            float temp = holePositions[i];
+            int randomIndex = Random.Range(i, holePositions.Count);
+            holePositions[i] = holePositions[randomIndex];
+            holePositions[randomIndex] = temp;
         }
     }
 }

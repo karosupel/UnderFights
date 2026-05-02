@@ -3212,7 +3212,8 @@ MonoBehaviour:
   thickness: 0.007
   maxRadius: 5
   holeLength: 0.8
-  time: 1.5
+  time: 1
+  numberOfAttacks: 10
 --- !u!1 &1617680867
 GameObject:
   m_ObjectHideFlags: 0

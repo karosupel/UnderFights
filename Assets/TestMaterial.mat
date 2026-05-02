@@ -68,8 +68,8 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HoleEnd: 2.4705493
-    - _HoleStart: 1.6705493
+    - _HoleEnd: 2
+    - _HoleStart: 1.2
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
