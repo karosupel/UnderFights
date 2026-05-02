@@ -12,13 +12,12 @@ public class ShockwaveScript : MonoBehaviour
 
     public float lifeTime = 5f;
     private GameObject player;
+
+    private bool canDamage = true;
     // Start is called before the first frame update
     void Start()
     {
         mat = GetComponent<SpriteRenderer>().material;
-
-        //mat.SetFloat("_HoleStart", 0.2f);
-        //mat.SetFloat("_HoleEnd", 1f);
         mat.SetFloat("_Radius", 0);
         mat.SetFloat("_Thickness", thickness);
 
@@ -37,8 +36,12 @@ public class ShockwaveScript : MonoBehaviour
 
         mat.SetFloat("_Radius", r);
 
-        IsPlayerHit(player.transform.position, transform.position);
-        Debug.DrawLine(transform.position, player.transform.position, Color.red);
+
+        if(IsPlayerHit(player.transform.position, transform.position) && canDamage)
+        {
+            MainManagerScript.Instance.player.GetComponent<HealthScript>().TakeDamage(10);
+            canDamage = false;
+        }
     }
 
     bool IsPlayerHit(Vector2 playerPos, Vector2 center)
