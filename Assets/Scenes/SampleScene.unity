@@ -3212,7 +3212,7 @@ MonoBehaviour:
   speed: 0.2
   thickness: 0.007
   maxRadius: 5
-  holeLength: 0.8
+  holeLength: 0.5
   time: 1
   numberOfAttacks: 10
 --- !u!114 &1589191517

@@ -42,4 +42,7 @@ public class PurinFightScript : MonoBehaviour
             attackIndex = UnityEngine.Random.Range(0, attacks.Count);
         }
     }
+
+    //TODO: Add phases depending on boss health
+    //current phase i tak dalej
 }
