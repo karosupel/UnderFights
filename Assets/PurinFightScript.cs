@@ -8,38 +8,38 @@ public class PurinFightScript : MonoBehaviour
 {
     PurinAttacksScript purinAttacks;
     public int attackIndex;
-    public enum attacks //musze zrobic tablice/slownik mozliwych atakow do wykonania
-    {
-        FoodAttack,
-        ShockwaveAttack
-    }
+
+    [Header("1st attack Settings")]
+    [SerializeField] int numberOfFoofAttacks;
+
+    [Header("2nd attack Settings")]
+    [SerializeField] int numberOfShockwaveAttacks;
+    [SerializeField] float timeBetweenAttacks;
+
+    List<IAttack> attacks = new List<IAttack>();
 
     void Awake()
     {
         purinAttacks = GetComponent<PurinAttacksScript>();
+
+        attacks.Add(new FoodAttack(purinAttacks, numberOfFoofAttacks));
+        attacks.Add(new ShockwaveAttack(purinAttacks, numberOfShockwaveAttacks, timeBetweenAttacks));
     }
 
     void OnEnable()
     {
-        //tu bedzie wywoływana funkcja attack
+        StartCoroutine(AttackLoop());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator AttackLoop()
     {
-        
-    }
+        yield return attacks[attackIndex].Execute();
 
-    public void Attack()
-    {
-        if(attackIndex < 2) //tutaj zamiast 2 bedzie ilosc mozliwych atakow
+        attackIndex++;
+
+        if (attackIndex >= attacks.Count)
         {
-            // wykonuje sie attack pod attacks[attackIndex];
+            attackIndex = UnityEngine.Random.Range(0, attacks.Count);
         }
-        else if(attackIndex >= 2)
-        {
-            //get random index for the next attack
-        }
-        //kiedy zakonczy sie walka attackIndex++;
     }
 }

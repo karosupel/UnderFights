@@ -15,7 +15,6 @@ public class FoodAttack : IAttack
 
     public IEnumerator Execute()
     {
-        purin.FoodAttack(amount);
-        yield return new WaitForSeconds(1f);
+        yield return purin.FoodAttack(amount);
     }
 }

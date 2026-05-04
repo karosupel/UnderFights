@@ -3228,6 +3228,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackIndex: 0
+  numberOfFoofAttacks: 4
+  numberOfShockwaveAttacks: 6
+  timeBetweenAttacks: 1
 --- !u!1 &1617680867
 GameObject:
   m_ObjectHideFlags: 0
