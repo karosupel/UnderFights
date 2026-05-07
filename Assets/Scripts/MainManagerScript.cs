@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class MainManagerScript : MonoBehaviour
@@ -27,6 +28,10 @@ public class MainManagerScript : MonoBehaviour
     [SerializeField] public Vector2 f_panel_position;
     [SerializeField] public Vector2 f_panel_size;
 
+    [Header("Events")]
+
+    public UnityEvent OnFightStart;
+
     void Awake()
     {
         if(Instance == null)
@@ -49,9 +54,9 @@ public class MainManagerScript : MonoBehaviour
 
         //setting the main panel active
         DamagePanel.SetActive(false);
-        // boxScript.Resize(panel_position, panel_size);
-        // player.SetActive(false);
-        // mainPanelScript.StartTyping("* The air is filled with the smell of pudding");
+        boxScript.Resize(panel_position, panel_size);
+        player.SetActive(false);
+        mainPanelScript.StartTyping("* The air is filled with the smell of pudding");
     }
 
     // Update is called once per frame
@@ -70,6 +75,8 @@ public class MainManagerScript : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Mouse0) && DamagePanel.activeSelf)
         {
             Debug.Log("Multiplier: " + damagePanelScript.GetMultiplier());
+            TransformToFightPanel();
+            OnFightStart?.Invoke();
         }
     }
 

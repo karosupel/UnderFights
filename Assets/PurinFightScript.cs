@@ -26,7 +26,7 @@ public class PurinFightScript : MonoBehaviour
         attacks.Add(new ShockwaveAttack(purinAttacks, numberOfShockwaveAttacks, timeBetweenAttacks));
     }
 
-    void OnEnable()
+    public void StartFight()
     {
         StartCoroutine(AttackLoop());
     }
