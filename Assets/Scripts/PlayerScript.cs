@@ -16,6 +16,11 @@ public class PlayerScript : MonoBehaviour
         healthScript = GetComponent<HealthScript>();
     }
 
+    void OnEnable()
+    {
+        transform.position = MainManagerScript.Instance.box.transform.position;
+    }
+
     void Update()
     {
         

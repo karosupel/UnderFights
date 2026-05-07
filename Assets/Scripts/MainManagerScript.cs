@@ -8,7 +8,7 @@ public class MainManagerScript : MonoBehaviour
 {
     public static MainManagerScript Instance;
 
-    [SerializeField] GameObject box;
+    [SerializeField] public GameObject box;
     [SerializeField] public GameObject player;
 
     [SerializeField] float transitionDuration;
