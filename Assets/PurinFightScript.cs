@@ -33,14 +33,19 @@ public class PurinFightScript : MonoBehaviour
 
     IEnumerator AttackLoop()
     {
-        yield return attacks[attackIndex].Execute();
-
-        attackIndex++;
-
         if (attackIndex >= attacks.Count)
         {
             attackIndex = UnityEngine.Random.Range(0, attacks.Count);
         }
+
+        yield return attacks[attackIndex].Execute();
+
+        attackIndex++;
+
+        yield return new WaitForSeconds(0.6f);
+
+        StartCoroutine(MainManagerScript.Instance.TransformToMainPanel("* You still have some chocolate left on your clothes..."));
+
     }
 
     //TODO: Add phases depending on boss health
