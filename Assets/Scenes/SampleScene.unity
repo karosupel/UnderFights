@@ -567,6 +567,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  fightButton: {fileID: 1550965916}
 --- !u!4 &496362358
 Transform:
   m_ObjectHideFlags: 0
@@ -3277,7 +3278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 255f7c89f0dc3a344b63e177981044fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointA: {x: 0, y: 0, z: 0}
+  pointA: {x: -12.25, y: -2, z: 0}
   pointB: {x: 12.25, y: -2, z: 0}
   moveSpeed: 7
 --- !u!212 &1617680869

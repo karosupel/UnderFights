@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class MainManagerScript : MonoBehaviour
@@ -32,6 +34,8 @@ public class MainManagerScript : MonoBehaviour
 
     public UnityEvent OnFightStart;
 
+    [Header("UI Events")]
+    [SerializeField] Button fightButton;
     void Awake()
     {
         if(Instance == null)
@@ -97,6 +101,7 @@ public class MainManagerScript : MonoBehaviour
         yield return new WaitForSeconds(transitionDuration);
 
         MainPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(fightButton.gameObject);
         mainPanelScript.StartTyping(Text);
     }
 
