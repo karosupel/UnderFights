@@ -40,6 +40,8 @@ public class PurinFightScript : MonoBehaviour
 
         yield return attacks[attackIndex].Execute();
 
+        yield return new WaitForSeconds(1.2f);
+
         attackIndex++;
 
         yield return new WaitForSeconds(0.6f);
