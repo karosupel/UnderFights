@@ -13,9 +13,11 @@ public class HealthScript : MonoBehaviour, IDamageable
     public Slider slider;
     public TextMeshProUGUI hpValueText;
 
+    [SerializeField] public Stats stats;
     
     void Start()
     {
+        maxHealth = stats.health;
         health = maxHealth;
         slider.maxValue = maxHealth;
         slider.value = health;
