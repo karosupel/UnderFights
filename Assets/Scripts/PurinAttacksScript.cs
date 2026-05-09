@@ -22,6 +22,13 @@ public class PurinAttacksScript : MonoBehaviour
 
     private float HoleStart = 0.2f;
     private float HoleEnd = 1f;
+
+    private Stats stats;
+
+    void Awake()
+    {
+        stats = GetComponent<HealthScript>().stats;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +55,7 @@ public class PurinAttacksScript : MonoBehaviour
 
     public IEnumerator FoodAttack(int numberOfAttacks)
     {
+        foodPrefab.GetComponent<FoodScript>().attack = stats.attack / 4;
         float yOffset = -2f;
         for(int i=0; i<numberOfAttacks; i++)
         {
@@ -91,6 +99,7 @@ public class PurinAttacksScript : MonoBehaviour
             HoleEnd = HoleStart + holeLength;
             shockwaveScript.mat.SetFloat("_HoleStart", HoleStart);
             shockwaveScript.mat.SetFloat("_HoleEnd", HoleEnd);
+            shockwaveScript.attack = stats.attack;
             Instantiate(shockwavePrefab, spawnPoint, Quaternion.Euler(0,0,180));
             yield return new WaitForSeconds(timeBetweenAttacks);
         }

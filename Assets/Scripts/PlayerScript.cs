@@ -36,13 +36,4 @@ public class PlayerScript : MonoBehaviour
         rb.velocity = move * speed;
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-        {
-            healthScript.TakeDamage(10);
-            Destroy(collision.gameObject);
-        }
-    }
-
 }

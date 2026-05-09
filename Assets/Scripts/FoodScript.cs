@@ -9,6 +9,8 @@ public class FoodScript : MonoBehaviour
 
     [SerializeField] float speed;
     [SerializeField] float lifeTime;
+
+    public float attack;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,5 +26,12 @@ public class FoodScript : MonoBehaviour
         transform.position = transform.position + direction.normalized * speed * Time.deltaTime;
     }
 
-
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            player.GetComponent<HealthScript>().TakeDamage(attack);
+            Destroy(gameObject);
+        }
+    }
 }

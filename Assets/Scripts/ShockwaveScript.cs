@@ -10,6 +10,8 @@ public class ShockwaveScript : MonoBehaviour
     public float maxRadius;
     public float minRadius;
 
+    public float attack;
+
     public float lifeTime = 5f;
     private GameObject player;
 
@@ -39,7 +41,7 @@ public class ShockwaveScript : MonoBehaviour
 
         if(IsPlayerHit(player.transform.position, transform.position) && canDamage)
         {
-            MainManagerScript.Instance.player.GetComponent<HealthScript>().TakeDamage(10);
+            MainManagerScript.Instance.player.GetComponent<HealthScript>().TakeDamage(attack);
             canDamage = false;
         }
     }
