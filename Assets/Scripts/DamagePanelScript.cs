@@ -17,6 +17,10 @@ public class DamagePanelScript : MonoBehaviour
 
     private GameObject activeEnemy;
     private HealthScript activeEnemyHealthScript;
+
+    private GameObject activeEnemyCanvas;
+
+    private int damage;
     
     void Awake()
     {
@@ -28,6 +32,7 @@ public class DamagePanelScript : MonoBehaviour
         if(activeEnemy != null)
         {
             activeEnemyHealthScript = activeEnemy.GetComponent<HealthScript>();
+            activeEnemyCanvas = activeEnemy.transform.GetChild(0).gameObject;
         }
 
     }
@@ -72,9 +77,20 @@ public class DamagePanelScript : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Mouse0) && gameObject.activeSelf)
         {
             Debug.Log("Multiplier: " + GetMultiplier());
-            int damage = Mathf.RoundToInt(GetMultiplier() * 10); // * enemy def later
+            damage = Mathf.RoundToInt(GetMultiplier() * 10); // * enemy def later
             activeEnemyHealthScript.TakeDamage(damage);
-            MainManagerScript.Instance.TransformToFightPanel();
+            //play canvas animation here
+            StartCoroutine(ShowHealthBar()); //placeholder
         }
+    }
+
+    IEnumerator ShowHealthBar()
+    {
+        activeEnemyCanvas.SetActive(true);
+        slider.GetComponent<SliderScript>().enabled = false; //stop the slider movement
+        yield return new WaitForSeconds(1f);
+        activeEnemyCanvas.SetActive(false);
+        slider.GetComponent<SliderScript>().enabled = true; //resume the slider movement
+        MainManagerScript.Instance.TransformToFightPanel();
     }
 }
