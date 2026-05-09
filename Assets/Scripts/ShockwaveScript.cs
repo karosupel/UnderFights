@@ -14,6 +14,7 @@ public class ShockwaveScript : MonoBehaviour
 
     public float lifeTime = 5f;
     private GameObject player;
+    private Collider2D playerCollider;
 
     private bool canDamage = true;
     // Start is called before the first frame update
@@ -24,6 +25,7 @@ public class ShockwaveScript : MonoBehaviour
         mat.SetFloat("_Thickness", thickness);
 
         player = MainManagerScript.Instance.player;
+        playerCollider = player.GetComponent<BoxCollider2D>();
 
         Destroy(gameObject, lifeTime);
     }
@@ -39,40 +41,58 @@ public class ShockwaveScript : MonoBehaviour
         mat.SetFloat("_Radius", r);
 
 
-        if(IsPlayerHit(player.transform.position, transform.position) && canDamage)
+        if(IsPlayerHit() && canDamage)
         {
             MainManagerScript.Instance.player.GetComponent<HealthScript>().TakeDamage(attack);
             canDamage = false;
         }
     }
 
-    bool IsPlayerHit(Vector2 playerPos, Vector2 center)
+    bool IsPlayerHit()
     {
-        Vector2 p = transform.InverseTransformPoint(playerPos);
+        Bounds bounds = playerCollider.bounds;
 
-        float dist = p.magnitude;
+        // punkty hitboxa w world space
+        Vector2[] points =
+        {
+            bounds.center,
+
+            new Vector2(bounds.min.x, bounds.center.y),
+            new Vector2(bounds.max.x, bounds.center.y),
+
+            new Vector2(bounds.center.x, bounds.min.y),
+            new Vector2(bounds.center.x, bounds.max.y),
+
+            bounds.min,
+            bounds.max,
+
+            new Vector2(bounds.min.x, bounds.max.y),
+            new Vector2(bounds.max.x, bounds.min.y)
+        };
 
         float radius = mat.GetFloat("_Radius");
         float thickness = mat.GetFloat("_Thickness");
 
-        // pierścień
-        bool inRing = Mathf.Abs(dist - radius) < thickness;
-
-        // półokrąg
-        bool inHalf = p.y > 0;
-
-        // kąt
-        float angle = Mathf.Atan2(p.y, p.x);
-
         float holeStart = mat.GetFloat("_HoleStart");
         float holeEnd = mat.GetFloat("_HoleEnd");
 
-        bool inHole = angle > holeStart && angle < holeEnd;
-        if(inRing && inHalf && !inHole)
+        foreach (Vector2 point in points)
         {
-            Debug.Log("Player is hit");
+            Vector2 p = transform.InverseTransformPoint(point);
+
+            float dist = p.magnitude;
+
+            bool inRing = Mathf.Abs(dist - radius) < thickness;
+            bool inHalf = p.y > 0;
+
+            float angle = Mathf.Atan2(p.y, p.x);
+
+            bool inHole = angle > holeStart && angle < holeEnd;
+
+            if (inRing && inHalf && !inHole)
+                return true;
         }
 
-        return inRing && inHalf && !inHole;
+        return false;
     }
 }
