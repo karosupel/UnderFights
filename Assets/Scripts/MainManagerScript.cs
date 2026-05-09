@@ -75,13 +75,6 @@ public class MainManagerScript : MonoBehaviour
         {
             StartCoroutine(TransformToMainPanel("* Suddenly you became very hungry..."));
         } 
-
-        if(Input.GetKeyDown(KeyCode.Mouse0) && DamagePanel.activeSelf)
-        {
-            Debug.Log("Multiplier: " + damagePanelScript.GetMultiplier());
-            TransformToFightPanel();
-            OnFightStart?.Invoke();
-        }
     }
 
     public void TransformToDamagePanel()
@@ -111,5 +104,6 @@ public class MainManagerScript : MonoBehaviour
         boxScript.SmoothResize(f_panel_position, f_panel_size, transitionDuration);
         DamagePanel.SetActive(false);
         MainPanel.SetActive(false);
+        OnFightStart?.Invoke();
     }
 }

@@ -14,12 +14,21 @@ public class DamagePanelScript : MonoBehaviour
     private Canvas damagePanelCanvas;
     private Vector2 panel_position;
     private Vector2 panel_size;
+
+    private GameObject activeEnemy;
+    private HealthScript activeEnemyHealthScript;
     
     void Awake()
     {
         slider = transform.GetChild(0).gameObject;
         damagePanelCanvas = gameObject.GetComponentInChildren<Canvas>();
         sliderScript = slider.GetComponent<SliderScript>();
+
+        activeEnemy = GameObject.FindGameObjectWithTag("Enemy");
+        if(activeEnemy != null)
+        {
+            activeEnemyHealthScript = activeEnemy.GetComponent<HealthScript>();
+        }
 
     }
     void Start()
@@ -56,5 +65,16 @@ public class DamagePanelScript : MonoBehaviour
         //normal hit 
         float multiplier = 1f - normalized;
         return multiplier;
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Mouse0) && gameObject.activeSelf)
+        {
+            Debug.Log("Multiplier: " + GetMultiplier());
+            int damage = Mathf.RoundToInt(GetMultiplier() * 10); // * enemy def later
+            activeEnemyHealthScript.TakeDamage(damage);
+            MainManagerScript.Instance.TransformToFightPanel();
+        }
     }
 }
