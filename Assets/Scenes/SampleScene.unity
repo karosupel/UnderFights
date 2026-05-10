@@ -3207,6 +3207,7 @@ MonoBehaviour:
   health: 0
   slider: {fileID: 1624676775}
   hpValueText: {fileID: 1075085390}
+  animationFinished: 0
   stats: {fileID: 11400000, guid: 66c6751b9dc848b4c9fc16526370c21f, type: 2}
 --- !u!114 &1589191516
 MonoBehaviour:
@@ -3675,6 +3676,7 @@ MonoBehaviour:
   health: 0
   slider: {fileID: 390829415}
   hpValueText: {fileID: 1259634335}
+  animationFinished: 0
   stats: {fileID: 11400000, guid: 913f0445b450bc04981977d6c59125b1, type: 2}
 --- !u!1 &1690058149
 GameObject:

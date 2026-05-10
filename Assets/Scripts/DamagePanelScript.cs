@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -77,7 +78,8 @@ public class DamagePanelScript : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Mouse0) && gameObject.activeSelf)
         {
             Debug.Log("Multiplier: " + GetMultiplier());
-            damage = Mathf.RoundToInt(GetMultiplier() * 10); // * enemy def later
+            float player_attack = MainManagerScript.Instance.player.GetComponent<HealthScript>().stats.attack;
+            damage = Mathf.RoundToInt(GetMultiplier() * player_attack); // * enemy def later
             activeEnemyHealthScript.TakeDamage(damage);
             //play canvas animation here
             StartCoroutine(ShowHealthBar()); //placeholder
@@ -88,8 +90,8 @@ public class DamagePanelScript : MonoBehaviour
     {
         activeEnemyCanvas.SetActive(true);
         slider.GetComponent<SliderScript>().enabled = false; //stop the slider movement
-        yield return new WaitForSeconds(1f);
-        activeEnemyCanvas.SetActive(false);
+        yield return new WaitUntil(() => activeEnemyHealthScript.animationFinished); 
+        yield return new WaitForSeconds(0.5f);
         slider.GetComponent<SliderScript>().enabled = true; //resume the slider movement
         MainManagerScript.Instance.TransformToFightPanel();
     }
