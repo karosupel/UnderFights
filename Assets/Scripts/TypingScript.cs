@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class MainPanelScript : MonoBehaviour
+public class TypingScript : MonoBehaviour
 {
-    
     public TMP_Text dialogueText;
     public float typingSpeed = 0.05f;
 
@@ -33,6 +32,4 @@ public class MainPanelScript : MonoBehaviour
             yield return new WaitForSeconds(typingSpeed);
         }
     }
-
-    
 }

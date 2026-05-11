@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -13,6 +14,10 @@ public class MainManagerScript : MonoBehaviour
     [SerializeField] public GameObject box;
     [SerializeField] public GameObject player;
 
+    TypingScript typingScript;
+
+    public GameObject activeEnemy;
+
     [SerializeField] float transitionDuration;
     private BoxScript boxScript;
 
@@ -24,11 +29,15 @@ public class MainManagerScript : MonoBehaviour
 
     [Header("MainPanel")]
     [SerializeField] GameObject MainPanel;
-    private MainPanelScript mainPanelScript;
+    [SerializeField] TMPro.TMP_Text MainPanelText;
 
     [Header("FightPanel")]
     [SerializeField] public Vector2 f_panel_position;
     [SerializeField] public Vector2 f_panel_size;
+
+    [Header("CheckPanel")]
+    [SerializeField] GameObject CheckPanel;
+    [SerializeField] TMPro.TMP_Text CheckPanelText;
 
     [Header("Events")]
 
@@ -54,13 +63,15 @@ public class MainManagerScript : MonoBehaviour
     {
         boxScript = box.GetComponent<BoxScript>();
         damagePanelScript = DamagePanel.GetComponent<DamagePanelScript>();
-        mainPanelScript = MainPanel.GetComponent<MainPanelScript>();
+        typingScript = GetComponent<TypingScript>();
+        typingScript.dialogueText = MainPanelText;
+        activeEnemy = GameObject.FindGameObjectWithTag("Enemy");
 
         //setting the main panel active
         DamagePanel.SetActive(false);
         boxScript.Resize(panel_position, panel_size);
         player.SetActive(false);
-        mainPanelScript.StartTyping("* The air is filled with the smell of pudding");
+        typingScript.StartTyping("* The air is filled with the smell of pudding");
     }
 
     // Update is called once per frame
@@ -95,7 +106,8 @@ public class MainManagerScript : MonoBehaviour
 
         MainPanel.SetActive(true);
         EventSystem.current.SetSelectedGameObject(fightButton.gameObject);
-        mainPanelScript.StartTyping(Text);
+        typingScript.dialogueText = MainPanelText;
+        typingScript.StartTyping(Text);
     }
 
     public void TransformToFightPanel()
@@ -105,5 +117,18 @@ public class MainManagerScript : MonoBehaviour
         DamagePanel.SetActive(false);
         MainPanel.SetActive(false);
         OnFightStart?.Invoke();
+    }
+
+    public void TransformToCheckPanel()
+    {
+        boxScript.Resize(panel_position, panel_size);
+        MainPanel.SetActive(false);
+        CheckPanel.SetActive(true);
+        string text = "* You check the enemy's stats... \n\n" +
+                      "* HP: " + activeEnemy.GetComponent<HealthScript>().stats.health + "     " +
+                      "* ATK: " + activeEnemy.GetComponent<HealthScript>().stats.attack + "     " +
+                      "* DEF: " + activeEnemy.GetComponent<HealthScript>().stats.defense;
+        typingScript.dialogueText = CheckPanelText;
+        typingScript.StartTyping(text);
     }
 }
