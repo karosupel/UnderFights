@@ -39,6 +39,9 @@ public class MainManagerScript : MonoBehaviour
     [SerializeField] GameObject CheckPanel;
     [SerializeField] TMPro.TMP_Text CheckPanelText;
 
+    [Header("ItemPanel")]
+    [SerializeField] GameObject ItemPanel;
+
     [Header("Events")]
 
     public UnityEvent OnFightStart;
@@ -84,7 +87,7 @@ public class MainManagerScript : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.L))
         {
-            StartCoroutine(TransformToMainPanel("* Suddenly you became very hungry..."));
+            TransformToMainPanel("* Suddenly you became very hungry...");
         } 
     }
 
@@ -96,7 +99,12 @@ public class MainManagerScript : MonoBehaviour
         DamagePanel.SetActive(true);
     }
 
-    public IEnumerator TransformToMainPanel(string Text)
+    public void TransformToMainPanel(string Text)
+    {
+        StartCoroutine(TransformToMainPanelCorouting(Text));
+    }
+
+    public IEnumerator TransformToMainPanelCorouting(string Text)
     {
         DamagePanel.SetActive(false);
         player.SetActive(false);
@@ -130,5 +138,12 @@ public class MainManagerScript : MonoBehaviour
                       "* DEF: " + activeEnemy.GetComponent<HealthScript>().stats.defense;
         typingScript.dialogueText = CheckPanelText;
         typingScript.StartTyping(text);
+    }
+
+    public void TransformToItemPanel()
+    {
+        boxScript.Resize(panel_position, panel_size);
+        MainPanel.SetActive(false);
+        ItemPanel.SetActive(true);
     }
 }

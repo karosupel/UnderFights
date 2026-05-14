@@ -46,7 +46,7 @@ public class PurinFightScript : MonoBehaviour
 
         yield return new WaitForSeconds(0.6f);
 
-        StartCoroutine(MainManagerScript.Instance.TransformToMainPanel("* You still have some chocolate left on your clothes..."));
+        MainManagerScript.Instance.TransformToMainPanel("* You still have some chocolate left on your clothes...");
 
     }
 
