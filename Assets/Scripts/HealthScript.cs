@@ -58,6 +58,24 @@ public class HealthScript : MonoBehaviour, IDamageable
         }
     }
 
+    public void Heal(float amount)
+    {
+        health += amount;
+        if (health > maxHealth)
+            health = maxHealth;
+
+        if(gameObject.tag=="Player")
+        {
+            hpValueText.text = health.ToString() + "/" + maxHealth.ToString();
+            slider.value = health;
+        }
+        else
+        {
+            hpValueText.text = health.ToString();
+            SmoothSliderUpdate(health);
+        }
+    }
+
     public void SmoothSliderUpdate(float newHealth)
     {
         StartCoroutine(SmoothSliderTransition(newHealth));
