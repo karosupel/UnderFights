@@ -96,6 +96,7 @@ public class MainManagerScript : MonoBehaviour
         MainPanel.SetActive(false);
         player.SetActive(false);
         boxScript.Resize(panel_position, panel_size);
+        ItemPanel.SetActive(false);
         DamagePanel.SetActive(true);
     }
 
@@ -107,6 +108,7 @@ public class MainManagerScript : MonoBehaviour
     public IEnumerator TransformToMainPanelCorouting(string Text)
     {
         DamagePanel.SetActive(false);
+        ItemPanel.SetActive(false);
         player.SetActive(false);
 
         boxScript.SmoothResize(panel_position, panel_size, transitionDuration);
@@ -123,6 +125,7 @@ public class MainManagerScript : MonoBehaviour
         player.SetActive(true);
         boxScript.SmoothResize(f_panel_position, f_panel_size, transitionDuration);
         DamagePanel.SetActive(false);
+        ItemPanel.SetActive(false);
         MainPanel.SetActive(false);
         OnFightStart?.Invoke();
     }
@@ -130,13 +133,12 @@ public class MainManagerScript : MonoBehaviour
     public void TransformToCheckPanel()
     {
         boxScript.Resize(panel_position, panel_size);
-        MainPanel.SetActive(false);
-        CheckPanel.SetActive(true);
+        ItemPanel.SetActive(false);
+        MainPanel.SetActive(true);
         string text = "* You check the enemy's stats... \n\n" +
                       "* HP: " + activeEnemy.GetComponent<HealthScript>().stats.health + "     " +
                       "* ATK: " + activeEnemy.GetComponent<HealthScript>().stats.attack + "     " +
                       "* DEF: " + activeEnemy.GetComponent<HealthScript>().stats.defense;
-        typingScript.dialogueText = CheckPanelText;
         typingScript.StartTyping(text);
     }
 
