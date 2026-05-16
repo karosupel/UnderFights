@@ -143,20 +143,20 @@ public class PurinAttacksScript : MonoBehaviour
 
     IEnumerator StraightFoodAttack()
     {
-        StartCoroutine(SpawnPairStraightFood(Quaternion.Euler(0,0,180)));
-        StartCoroutine(SpawnPairStraightFood(Quaternion.Euler(0,0,0)));
+        StartCoroutine(SpawnPairStraightFood(new Vector2(0, 1f), Quaternion.Euler(0,0,180)));
+        StartCoroutine(SpawnPairStraightFood(new Vector2(0, -1f), Quaternion.Euler(0,0,0)));
         yield return null;
     }
 
-    IEnumerator SpawnPairStraightFood(Quaternion rotation)
+    IEnumerator SpawnPairStraightFood(Vector2 offsetFromStartPoint,Quaternion rotation)
     {
         for(int i=0; i<3; i++)
         {
             //starting position moving towards the middle of the square 3 times
             for(int j=0; j<3; j++)
             {
-                Instantiate(StraightFoodPrefab, startPoint, rotation);
-                Instantiate(StraightFoodPrefab, startPoint * -1f, rotation);
+                Instantiate(StraightFoodPrefab, startPoint + offsetFromStartPoint, rotation);
+                Instantiate(StraightFoodPrefab, (startPoint + offsetFromStartPoint)*-1f, rotation);
                 yield return new WaitForSeconds(0.5f);
             }
             startPoint = new Vector2(startPoint.x - 1f, startPoint.y);

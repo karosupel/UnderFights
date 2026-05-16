@@ -3870,6 +3870,8 @@ MonoBehaviour:
   holeLength: 0.5
   time: 1
   numberOfAttacks: 10
+  StraightFoodPrefab: {fileID: 3941969652017974973, guid: aec9423b18bcac04a864ec3e9d58cdda, type: 3}
+  startPoint: {x: 3, y: 0}
 --- !u!114 &1589191517
 MonoBehaviour:
   m_ObjectHideFlags: 0
