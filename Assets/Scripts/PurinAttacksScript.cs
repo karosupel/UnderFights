@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Tilemaps;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PurinAttacksScript : MonoBehaviour
 {
@@ -27,6 +30,17 @@ public class PurinAttacksScript : MonoBehaviour
     [Header("Third Attack")]
     [SerializeField] public GameObject StraightFoodPrefab;
     [SerializeField] Vector2 startPoint;
+    [SerializeField] float offsetFromStartPoint;
+
+    [SerializeField] public int amount_of_food;
+    [SerializeField] public float offset_between_food;
+
+    [SerializeField] public int number_of_repetitions;
+
+    [SerializeField] public float time_between_repetitions;
+
+    [SerializeField] public float time_between_food_spawn;
+    bool ThirdAttackFinished = false;
 
 
     private Stats stats;
@@ -34,6 +48,7 @@ public class PurinAttacksScript : MonoBehaviour
     void Awake()
     {
         stats = GetComponent<HealthScript>().stats;
+
     }
     // Start is called before the first frame update
     void Start()
@@ -60,7 +75,7 @@ public class PurinAttacksScript : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.H))
         {
-            StartCoroutine(StraightFoodAttack());
+            StartCoroutine(StraightFoodAttack(amount_of_food, offset_between_food, number_of_repetitions, time_between_repetitions, time_between_food_spawn));
         }
     }
 
@@ -135,32 +150,69 @@ public class PurinAttacksScript : MonoBehaviour
         for (int i = 0; i < holePositions.Count; i++)
         {
             float temp = holePositions[i];
-            int randomIndex = Random.Range(i, holePositions.Count);
+            int randomIndex = UnityEngine.Random.Range(i, holePositions.Count);
             holePositions[i] = holePositions[randomIndex];
             holePositions[randomIndex] = temp;
         }
     }
 
-    IEnumerator StraightFoodAttack()
+    public IEnumerator StraightFoodAttack(int amount_of_food, float offset_between_food, int number_of_repetitions, float time_between_repetitions, float time_between_food_spawn)
     {
-        StartCoroutine(SpawnPairStraightFood(new Vector2(0, 1f), Quaternion.Euler(0,0,180)));
-        StartCoroutine(SpawnPairStraightFood(new Vector2(0, -1f), Quaternion.Euler(0,0,0)));
-        yield return null;
+        ThirdAttackFinished = false;
+        amount_of_food = this.amount_of_food;
+        offset_between_food = this.offset_between_food;
+        number_of_repetitions = this.number_of_repetitions;
+        time_between_repetitions = this.time_between_repetitions;
+        time_between_food_spawn = this.time_between_food_spawn;
+        StartCoroutine(SpawnHorizontalPairStraightFood(new Vector2(0, offsetFromStartPoint), Quaternion.Euler(0,0,180)));
+        StartCoroutine(SpawnHorizontalPairStraightFood(new Vector2(0, -offsetFromStartPoint), Quaternion.Euler(0,0,0)));
+        StartCoroutine(SpawnVerticalPairStraightFood(new Vector2(-offsetFromStartPoint, 0), Quaternion.Euler(0,0,270)));
+        StartCoroutine(SpawnVerticalPairStraightFood(new Vector2(offsetFromStartPoint, 0), Quaternion.Euler(0,0,90)));
+        yield return new WaitUntil(() => ThirdAttackFinished);
     }
 
-    IEnumerator SpawnPairStraightFood(Vector2 offsetFromStartPoint,Quaternion rotation)
+    IEnumerator SpawnHorizontalPairStraightFood(Vector2 offsetFromStartPoint,Quaternion rotation)
     {
-        for(int i=0; i<3; i++)
+        float offset = Math.Abs(offsetFromStartPoint.y);
+        Vector2 startPoint = this.startPoint;
+        for(int i=0; i<number_of_repetitions; i++)
         {
             //starting position moving towards the middle of the square 3 times
-            for(int j=0; j<3; j++)
+            for(int j=0; j<amount_of_food; j++)
             {
-                Instantiate(StraightFoodPrefab, startPoint + offsetFromStartPoint, rotation);
-                Instantiate(StraightFoodPrefab, (startPoint + offsetFromStartPoint)*-1f, rotation);
-                yield return new WaitForSeconds(0.5f);
+                Instantiate(StraightFoodPrefab, startPoint + offsetFromStartPoint + new Vector2(offset, 0), rotation);
+                Instantiate(StraightFoodPrefab, startPoint + offsetFromStartPoint - new Vector2(offset, 0), rotation);
+                yield return new WaitForSeconds(time_between_food_spawn);
             }
-            startPoint = new Vector2(startPoint.x - 1f, startPoint.y);
-            yield return new WaitForSeconds(0.5f);
+            offset -= offset_between_food;
+            if(Math.Abs(offset) > offset_between_food)
+            {
+                offset = 0f;
+            }
+            yield return new WaitForSeconds(time_between_repetitions);
         }
+    }
+
+    IEnumerator SpawnVerticalPairStraightFood(Vector2 offsetFromStartPoint,Quaternion rotation)
+    {
+        float offset = Math.Abs(offsetFromStartPoint.x);
+        Vector2 startPoint = this.startPoint;
+        for(int i=0; i<number_of_repetitions; i++)
+        {
+            //starting position moving towards the middle of the square 3 times
+            for(int j=0; j<amount_of_food; j++)
+            {
+                Instantiate(StraightFoodPrefab, startPoint + offsetFromStartPoint + new Vector2(0, offset), rotation);
+                Instantiate(StraightFoodPrefab, startPoint + offsetFromStartPoint - new Vector2(0, offset), rotation);
+                yield return new WaitForSeconds(time_between_food_spawn);
+            }
+            offset -= offset_between_food;
+            if(Math.Abs(offset) > offset_between_food)
+            {
+                offset = 0;
+            }
+            yield return new WaitForSeconds(time_between_repetitions);
+        }
+        ThirdAttackFinished = true;
     }
 }

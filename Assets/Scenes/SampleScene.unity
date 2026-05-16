@@ -3871,7 +3871,13 @@ MonoBehaviour:
   time: 1
   numberOfAttacks: 10
   StraightFoodPrefab: {fileID: 3941969652017974973, guid: aec9423b18bcac04a864ec3e9d58cdda, type: 3}
-  startPoint: {x: 3, y: 0}
+  startPoint: {x: 0, y: -1}
+  offsetFromStartPoint: 2
+  amount_of_food: 2
+  offset_between_food: 2
+  number_of_repetitions: 3
+  time_between_repetitions: 1
+  time_between_food_spawn: 0.5
 --- !u!114 &1589191517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4230,7 +4236,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &1675257056
 SpriteRenderer:
   m_ObjectHideFlags: 0

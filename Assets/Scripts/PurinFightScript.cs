@@ -24,6 +24,7 @@ public class PurinFightScript : MonoBehaviour
 
         attacks.Add(new FoodAttack(purinAttacks, numberOfFoofAttacks));
         attacks.Add(new ShockwaveAttack(purinAttacks, numberOfShockwaveAttacks, timeBetweenAttacks));
+        attacks.Add(new StraightFoodAttack(purinAttacks));
     }
 
     public void StartFight()
