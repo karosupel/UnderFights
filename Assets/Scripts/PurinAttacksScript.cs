@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class PurinAttacksScript : MonoBehaviour
@@ -22,6 +23,11 @@ public class PurinAttacksScript : MonoBehaviour
 
     private float HoleStart = 0.2f;
     private float HoleEnd = 1f;
+
+    [Header("Third Attack")]
+    [SerializeField] public GameObject StraightFoodPrefab;
+    [SerializeField] Vector2 startPoint;
+
 
     private Stats stats;
 
@@ -50,6 +56,11 @@ public class PurinAttacksScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
         {
             StartCoroutine(SchockwaveAttack(numberOfAttacks, time));
+        }
+
+        if(Input.GetKeyDown(KeyCode.H))
+        {
+            StartCoroutine(StraightFoodAttack());
         }
     }
 
@@ -127,6 +138,29 @@ public class PurinAttacksScript : MonoBehaviour
             int randomIndex = Random.Range(i, holePositions.Count);
             holePositions[i] = holePositions[randomIndex];
             holePositions[randomIndex] = temp;
+        }
+    }
+
+    IEnumerator StraightFoodAttack()
+    {
+        StartCoroutine(SpawnPairStraightFood(Quaternion.Euler(0,0,180)));
+        StartCoroutine(SpawnPairStraightFood(Quaternion.Euler(0,0,0)));
+        yield return null;
+    }
+
+    IEnumerator SpawnPairStraightFood(Quaternion rotation)
+    {
+        for(int i=0; i<3; i++)
+        {
+            //starting position moving towards the middle of the square 3 times
+            for(int j=0; j<3; j++)
+            {
+                Instantiate(StraightFoodPrefab, startPoint, rotation);
+                Instantiate(StraightFoodPrefab, startPoint * -1f, rotation);
+                yield return new WaitForSeconds(0.5f);
+            }
+            startPoint = new Vector2(startPoint.x - 1f, startPoint.y);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }
