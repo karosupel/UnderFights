@@ -6,11 +6,11 @@ using UnityEngine;
 public class BigFoodScript : MonoBehaviour
 {
     [SerializeField] GameObject miniFoodPrefab;
-    [SerializeField] int amountOfMiniFood;
-    [SerializeField] float lifetime;
+    public int amountOfMiniFood;
+    public float lifetime;
 
-    [SerializeField] Vector2 velocityVector;
-    [SerializeField] float speed;
+    public Vector2 velocityVector;
+    public float speed;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +31,7 @@ public class BigFoodScript : MonoBehaviour
         {
             float angle = i * (360f / amountOfMiniFood);
             Vector3 spawnPosition = transform.position + new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0);
-            Instantiate(miniFoodPrefab, spawnPosition, Quaternion.identity);
+            Instantiate(miniFoodPrefab, spawnPosition, Quaternion.Euler(0, 0, angle));
         }
         Destroy(gameObject);
     }
