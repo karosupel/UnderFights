@@ -118,7 +118,7 @@ public class PurinAttacksScript : MonoBehaviour
         for(int i=0; i<numberOfAttacks; i++)
         {
             Vector3 spawnPoint = new Vector3(transform.position.x,transform.position.y-2,0);
-            GeneratePositions(holePositions);
+            GeneratePositions(holePositions, 0.5f, 0.1f);
             HoleStart = holePositions[i];
             HoleEnd = HoleStart + holeLength;
             shockwaveScript.mat.SetFloat("_HoleStart", HoleStart);
@@ -131,13 +131,11 @@ public class PurinAttacksScript : MonoBehaviour
 
     List<float> holePositions = new List<float>();
 
-    void GeneratePositions(List<float> positions) //shuffle random
+    void GeneratePositions(List<float> positions, float start, float step) //shuffle random
     {
         positions.Clear();
         
         int count = numberOfAttacks;
-        float start = 0.5f;
-        float step = 0.1f;
 
         for (int i = 0; i < count; i++)
         {
@@ -157,15 +155,20 @@ public class PurinAttacksScript : MonoBehaviour
     public IEnumerator ExplosionAttack()
     {
         List<float> spawnPositionsX = new List<float>();
-        GeneratePositions(spawnPositionsX);
+        GeneratePositions(spawnPositionsX, xMinSpawn, 0.5f);
 
         for(int i = 0; i < amoutOfBigFood; i++)
         {
+            /*BigFoodScript bigFoodScript = bigFoodPrefab.GetComponent<BigFoodScript>();
+            bigFoodScript.amountOfMiniFood = amountOfMiniFood;
+            bigFoodScript.lifetime = lifetime;
+            bigFoodScript.velocityVector = velocityVector;
+            bigFoodScript.speed = bigFoodspeed;*/
             Instantiate(bigFoodPrefab, new Vector3(spawnPositionsX[i], ySpawn, 0), Quaternion.identity);
             yield return new WaitForSeconds(0.5f);
         }
 
-        yield return null;
+        yield return new WaitForSeconds(lifetime);
     }
 
 

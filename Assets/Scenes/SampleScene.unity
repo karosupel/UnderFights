@@ -3870,14 +3870,15 @@ MonoBehaviour:
   holeLength: 0.5
   time: 1
   numberOfAttacks: 10
-  StraightFoodPrefab: {fileID: 3941969652017974973, guid: aec9423b18bcac04a864ec3e9d58cdda, type: 3}
-  startPoint: {x: 0, y: -1}
-  offsetFromStartPoint: 2
-  amount_of_food: 2
-  offset_between_food: 2
-  number_of_repetitions: 3
-  time_between_repetitions: 1
-  time_between_food_spawn: 0.5
+  bigFoodPrefab: {fileID: 3793743496733367255, guid: 0aa0d4f0f63642642bde766124f81d30, type: 3}
+  xMaxSpawn: 14
+  xMinSpawn: 5.5
+  ySpawn: 4
+  amoutOfBigFood: 3
+  amountOfMiniFood: 0
+  lifetime: 2
+  velocityVector: {x: 0, y: 0}
+  bigFoodspeed: 0
 --- !u!114 &1589191517
 MonoBehaviour:
   m_ObjectHideFlags: 0
