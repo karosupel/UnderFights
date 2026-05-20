@@ -73,7 +73,7 @@ public class PurinAttacksScript : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.H))
         {
-            StartCoroutine(ExplosionAttack());
+            StartCoroutine(ExplosionAttack(amoutOfBigFood, amountOfMiniFood));
         }
     }
 
@@ -152,16 +152,16 @@ public class PurinAttacksScript : MonoBehaviour
         }
     }
 
-    public IEnumerator ExplosionAttack()
+    public IEnumerator ExplosionAttack(int amoutOfBigFood, int amountOfMiniFood)
     {
         List<float> spawnPositionsX = new List<float>();
         GeneratePositions(spawnPositionsX, xMinSpawn, 0.5f);
 
         for(int i = 0; i < amoutOfBigFood; i++)
         {
-            /*BigFoodScript bigFoodScript = bigFoodPrefab.GetComponent<BigFoodScript>();
+            BigFoodScript bigFoodScript = bigFoodPrefab.GetComponent<BigFoodScript>();
             bigFoodScript.amountOfMiniFood = amountOfMiniFood;
-            bigFoodScript.lifetime = lifetime;
+            /*bigFoodScript.lifetime = lifetime;
             bigFoodScript.velocityVector = velocityVector;
             bigFoodScript.speed = bigFoodspeed;*/
             Instantiate(bigFoodPrefab, new Vector3(spawnPositionsX[i], ySpawn, 0), Quaternion.identity);
