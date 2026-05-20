@@ -36,6 +36,7 @@ public class PurinFightScript : MonoBehaviour
 
     public void StartFight()
     {
+        CheckPhase();
         StartCoroutine(AttackLoop());
     }
 
@@ -60,12 +61,22 @@ public class PurinFightScript : MonoBehaviour
 
     void Update()
     {
-        if(healthScript.health < 0.6f * healthScript.maxHealth)
+        
+    }
+
+    void CheckPhase()
+    {
+        if(healthScript.health < 0.75f * healthScript.maxHealth)
         {
             attacks[0] = new FoodAttack(purinAttacks, numberOfFoofAttacks + 2);
             attacks[1] = new ShockwaveAttack(purinAttacks, numberOfShockwaveAttacks + 2, timeBetweenAttacks - 0.2f);
             attacks[2] = new ExplosionAttack(purinAttacks, amoutOfBigFood + 2, amountOfMiniFood + 2);
-            Debug.Log("Phase 2");
+        }
+        else if (healthScript.health < 0.5f * healthScript.maxHealth)
+        {
+            attacks[0] = new FoodAttack(purinAttacks, numberOfFoofAttacks + 4);
+            attacks[1] = new ShockwaveAttack(purinAttacks, numberOfShockwaveAttacks + 4, timeBetweenAttacks - 0.2f);
+            attacks[2] = new ExplosionAttack(purinAttacks, amoutOfBigFood + 4, amountOfMiniFood + 4);
         }
     }
 

@@ -115,6 +115,7 @@ public class PurinAttacksScript : MonoBehaviour
 
     public IEnumerator SchockwaveAttack(int numberOfAttacks, float timeBetweenAttacks )
     {
+        MainManagerScript.Instance.boxScript.Resize(MainManagerScript.Instance.f_panel_position, new Vector2(1.2f, 0.7f));
         for(int i=0; i<numberOfAttacks; i++)
         {
             Vector3 spawnPoint = new Vector3(transform.position.x,transform.position.y-2,0);
@@ -170,8 +171,6 @@ public class PurinAttacksScript : MonoBehaviour
 
         yield return new WaitForSeconds(lifetime);
     }
-
-
 
     
 }

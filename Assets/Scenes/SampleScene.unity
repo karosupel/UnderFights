@@ -666,6 +666,7 @@ MonoBehaviour:
   player: {fileID: 1675257052}
   activeEnemy: {fileID: 0}
   transitionDuration: 0.6
+  boxScript: {fileID: 0}
   DamagePanel: {fileID: 736371688}
   panel_position: {x: 0, y: -2}
   panel_size: {x: 3.5, y: 0.7}
@@ -3886,7 +3887,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1589191512}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 275a7c9cb0b24e94c9a454d7049099c6, type: 3}
   m_Name: 
@@ -3895,6 +3896,8 @@ MonoBehaviour:
   numberOfFoofAttacks: 4
   numberOfShockwaveAttacks: 6
   timeBetweenAttacks: 1
+  amoutOfBigFood: 3
+  amountOfMiniFood: 5
 --- !u!1 &1617680867
 GameObject:
   m_ObjectHideFlags: 0

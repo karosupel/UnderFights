@@ -19,7 +19,7 @@ public class MainManagerScript : MonoBehaviour
     public GameObject activeEnemy;
 
     [SerializeField] float transitionDuration;
-    private BoxScript boxScript;
+    public BoxScript boxScript;
 
     [Header("DamagePanel")]
     [SerializeField] GameObject DamagePanel;
@@ -120,6 +120,16 @@ public class MainManagerScript : MonoBehaviour
         typingScript.StartTyping(Text);
     }
 
+    // public void TransformToFightPanel()
+    // {
+    //     player.SetActive(true);
+    //     boxScript.SmoothResize(f_panel_position, f_panel_size, transitionDuration);
+    //     DamagePanel.SetActive(false);
+    //     ItemPanel.SetActive(false);
+    //     MainPanel.SetActive(false);
+    //     OnFightStart?.Invoke();
+    // }
+
     public void TransformToFightPanel()
     {
         player.SetActive(true);
@@ -127,6 +137,12 @@ public class MainManagerScript : MonoBehaviour
         DamagePanel.SetActive(false);
         ItemPanel.SetActive(false);
         MainPanel.SetActive(false);
+        StartCoroutine(DelayedFightStart());
+    }
+
+    private IEnumerator DelayedFightStart()
+    {
+        yield return new WaitForSeconds(transitionDuration);
         OnFightStart?.Invoke();
     }
 
