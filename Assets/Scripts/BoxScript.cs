@@ -33,9 +33,9 @@ public class BoxScript : MonoBehaviour
 
     public void Resize(Vector2 finalPosition, Vector2 finalSize)
     {
-        Debug.Log("Resizing box to: " + finalPosition + " and size: " + finalSize);
         transform.position = new Vector3(finalPosition.x, finalPosition.y, 0);
         sprite.size = finalSize;
+        UpdateColliders();
     }
 
 
