@@ -113,6 +113,7 @@ public class PurinAttacksScript : MonoBehaviour
         foodSpawnPoints.AddRange(newSpawnPoint);
     }
 
+    List<float> holePositions = new List<float>();
     public IEnumerator SchockwaveAttack(int numberOfAttacks, float timeBetweenAttacks )
     {
         MainManagerScript.Instance.boxScript.Resize(MainManagerScript.Instance.f_panel_position, new Vector2(1.2f, 0.7f));
@@ -129,8 +130,6 @@ public class PurinAttacksScript : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenAttacks);
         }
     }
-
-    List<float> holePositions = new List<float>();
 
     void GeneratePositions(List<float> positions, float start, float step) //shuffle random
     {
