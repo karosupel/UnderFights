@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using JetBrains.Annotations;
+using Cinemachine;
 
 public class HealthScript : MonoBehaviour, IDamageable
 {
@@ -17,6 +18,8 @@ public class HealthScript : MonoBehaviour, IDamageable
     public bool animationFinished = false;
 
     [SerializeField] public Stats stats;
+
+    CinemachineImpulseSource impulseSource;
     
     void Start()
     {
@@ -24,6 +27,7 @@ public class HealthScript : MonoBehaviour, IDamageable
         health = maxHealth;
         slider.maxValue = maxHealth;
         slider.value = health;
+        impulseSource = GetComponent<CinemachineImpulseSource>();
         if(gameObject.tag=="Player")
         {
             hpValueText.text = health.ToString() + "/" + maxHealth.ToString();
@@ -50,6 +54,7 @@ public class HealthScript : MonoBehaviour, IDamageable
         {
             hpValueText.text = health.ToString() + "/" + maxHealth.ToString();
             slider.value = health;
+            CinemashineManager.Instance.CameraShake(impulseSource);
         }
         else
         {
