@@ -949,6 +949,8 @@ GameObject:
   - component: {fileID: 1589191514}
   - component: {fileID: 1589191513}
   - component: {fileID: 1589191515}
+  - component: {fileID: 1589191517}
+  - component: {fileID: 1589191516}
   m_Layer: 0
   m_Name: Rat
   m_TagString: Enemy
@@ -1041,7 +1043,31 @@ MonoBehaviour:
   slider: {fileID: 1624676775}
   hpValueText: {fileID: 1075085390}
   animationFinished: 0
-  stats: {fileID: 11400000, guid: 66c6751b9dc848b4c9fc16526370c21f, type: 2}
+  stats: {fileID: 11400000, guid: 1130c35ab1ec7dc4cb986e1b06158dd7, type: 2}
+--- !u!114 &1589191516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589191512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e91ab0b46d725da43ae776e78c7804eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1589191517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589191512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0030af20afd2357489d9af44d141086f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1624676773
 GameObject:
   m_ObjectHideFlags: 0
