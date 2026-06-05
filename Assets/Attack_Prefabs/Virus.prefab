@@ -144,6 +144,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallSpeed: 2
-  waveAmplitude: 1
+  waveAmplitude: 2.1
   waveFrequency: 2
   lifetime: 5

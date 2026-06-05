@@ -11,6 +11,19 @@ public class RatAttacksScript : MonoBehaviour
     [SerializeField] float spinningSpeed;
     [SerializeField] int spins;
     private bool coroutineRunning = false;
+
+    [Header("Second Attack")]
+
+    [SerializeField] public GameObject virusPrefab;
+    [SerializeField] List<float> virusSpawnX;
+    [SerializeField] float virusSpawnY;
+    [SerializeField] int virusWaves;
+
+    [Header("Column Attack")]
+
+    [SerializeField] float columnIndex;
+    [SerializeField] int columnWaves;
+
     
     void Start()
     {
@@ -22,6 +35,14 @@ public class RatAttacksScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             StartCoroutine(SpinningAttack());
+        }
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            StartCoroutine(VirusSinAttack(virusWaves));
+        }
+        if(Input.GetKeyDown(KeyCode.H))
+        {
+            StartCoroutine(VirusColumnAttack(columnIndex, columnWaves));
         }
     }
 
@@ -78,4 +99,52 @@ public class RatAttacksScript : MonoBehaviour
         ChangeSpinDirection();
         StartCoroutine(SpinCoroutine(spinningSpeed, 1));
     }
+
+    void SpawnVirus(float x, float waveFrequency = 2f, float waveAmplitude = 2.1f, float fallSpeed = 2f)
+    {
+        GameObject virus = Instantiate(virusPrefab, new Vector3(x, virusSpawnY, 0), Quaternion.identity);
+        VirusScript virusScript = virus.GetComponent<VirusScript>();
+        virusScript.waveFrequency = waveFrequency;
+        virusScript.waveAmplitude = waveAmplitude;
+        virusScript.fallSpeed = fallSpeed;
+    }
+
+    IEnumerator SpawnVirusWave(int currentHole)
+    {
+        foreach(float x in virusSpawnX)
+        {
+            if (x != currentHole)
+            {
+                SpawnVirus(x);
+            }
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    IEnumerator VirusSinAttack(int waves)
+    {
+        int currentHole = Random.Range(0, virusSpawnX.Count);
+        for (int i = 0; i < waves; i++)
+        {
+            StartCoroutine(SpawnVirusWave(currentHole));
+            yield return new WaitForSeconds(1f);
+            currentHole += 1;
+            if (currentHole >= virusSpawnX.Count)
+            {
+                currentHole = 0;
+            }
+        }
+    }
+
+    IEnumerator VirusColumnAttack(float columnIndex, int waves)
+    {
+        for (int i = 0; i < waves; i++)
+        {
+            SpawnVirus(columnIndex, waveFrequency: 0f, waveAmplitude: 0f, fallSpeed: 3f);
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
+    //add so the column wave feels more like asgore
+    //add warning zones
+    //add box resizing so i dont have to use colums
 }
