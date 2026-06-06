@@ -167,17 +167,16 @@ public class RatAttacksScript : MonoBehaviour
 
     IEnumerator CheeseAttack()
     {
-        List<float> timeOffsets = new List<float>() {0f, 0.99f, 0.5f};
-        foreach(Vector2 position in cheeseSpawnPositions)
+        foreach (Vector2 position in cheeseSpawnPositions)
         {
-            warningZonesScript.ShowWarningZone(position, new Vector2(0.5f, 3f));
+            warningZonesScript.ShowWarningZone(position, new Vector2(1f, 1f));
+            yield return new WaitForSeconds(1f);
+            SpawnCheese(position, speed, lifetime: 5f);
+            yield return new WaitForSeconds(0.3f);
         }
-        yield return new WaitForSeconds(1f);
-        for(int i = 0; i < cheeseSpawnPositions.Count; i++)
-        {
-            SpawnCheese(cheeseSpawnPositions[i], speed, lifetime: 5f, timeOffset: timeOffsets[i]);
-            yield return new WaitForSeconds(0.5f);
-        }
+        //add warning zone at each fall not just the start
+        //add parameters
+        //box resize this attack
     }
 
     void SpawnCheese(Vector2 position, float speed, float lifetime, float timeOffset = 0f)

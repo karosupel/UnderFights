@@ -23,18 +23,13 @@ public class CheeseScript : MonoBehaviour
     void Update()
     {
         elapsedTime += Time.deltaTime / speed;
-        t = timeOffset + elapsedTime;
+
+        float t = Mathf.Repeat(elapsedTime + timeOffset, 1f);
 
         transform.position = Vector3.Lerp(
             startPosition,
-            startPosition + Vector2.down * 2f, // Replace with your actual end position
+            startPosition + Vector2.down * 2f,
             cheeseCurve.Evaluate(t)
         );
-
-        if(t >= 1f)
-        {
-            t = 0f;
-            elapsedTime = 0f;
-        }
     }
 }

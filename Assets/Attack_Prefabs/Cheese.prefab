@@ -147,8 +147,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0
+      time: -0.0041503906
+      value: 0.003025055
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -156,17 +156,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.12917176
-      value: 0.9964142
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.82201195
-    - serializedVersion: 3
-      time: 0.29583892
-      value: 0.99642944
+      time: 0.13885179
+      value: 0.004142165
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -174,26 +165,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.491687
-      value: 0.49663162
-      inSlope: -0.004510371
-      outSlope: -0.004510371
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.939124
-      outWeight: 0.85728544
-    - serializedVersion: 3
-      time: 0.700003
-      value: 0.49660492
-      inSlope: 0.027600544
-      outSlope: 0.027600544
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.9318196
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.8041799
-      value: 0.000043760985
+      time: 0.25844276
+      value: 1.0068257
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -201,16 +174,26 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 0
+      time: 0.37594113
+      value: 1.0070517
       inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.077718
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9957886
+      value: -0.00579834
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   speed: 2
   lifetime: 5
+  timeOffset: 0
