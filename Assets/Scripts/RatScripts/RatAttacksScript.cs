@@ -126,6 +126,7 @@ public class RatAttacksScript : MonoBehaviour
 
     IEnumerator VirusSinAttack(int waves)
     {
+        MainManagerScript.Instance.boxScript.Resize(MainManagerScript.Instance.f_panel_position, new Vector2(0.5f, 0.7f));
         int currentHole = Random.Range(0, virusSpawnX.Count);
         for (int i = 0; i < waves; i++)
         {
@@ -154,7 +155,4 @@ public class RatAttacksScript : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
         }
     }
-    //add so the column wave feels more like asgore
-    //add warning zones
-    //add box resizing so i dont have to use colums
 }
