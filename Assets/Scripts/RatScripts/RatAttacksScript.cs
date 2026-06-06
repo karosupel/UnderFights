@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RatAttacksScript : MonoBehaviour
 {
-    [SerializeField] public GameObject warningZonePrefab;
+    WarningZonesScript warningZonesScript;
 
     [Header("First Attack")]
     [SerializeField] public GameObject SpiningGameObject; //virus will have a toxic effect on the player, making them take damage over time (player turning green)
@@ -27,7 +27,7 @@ public class RatAttacksScript : MonoBehaviour
     
     void Start()
     {
-        
+        warningZonesScript = FindObjectOfType<WarningZonesScript>();
     }
 
     void Update()
@@ -94,6 +94,9 @@ public class RatAttacksScript : MonoBehaviour
 
     IEnumerator SpinningAttack()
     {
+        warningZonesScript.ShowWarningZone(MainManagerScript.Instance.box.transform.position, new Vector2(3f, 1f));
+        warningZonesScript.ShowWarningZone(MainManagerScript.Instance.box.transform.position, new Vector2(1f, 3f));
+        yield return new WaitForSeconds(1f);
         StartCoroutine(SpinCoroutine(spinningSpeed, 1));
         yield return new WaitUntil(() => !coroutineRunning);
         ChangeSpinDirection();
@@ -138,10 +141,17 @@ public class RatAttacksScript : MonoBehaviour
 
     IEnumerator VirusColumnAttack(float columnIndex, int waves)
     {
+        warningZonesScript.ShowWarningZone(new Vector2(columnIndex, -1), new Vector2(0.6f, 5f));
+        yield return new WaitForSeconds(1f);
         for (int i = 0; i < waves; i++)
         {
-            SpawnVirus(columnIndex, waveFrequency: 0f, waveAmplitude: 0f, fallSpeed: 3f);
-            yield return new WaitForSeconds(0.2f);
+            float offset = Random.Range(-0.3f, 0.3f);
+            SpawnVirus(columnIndex, waveFrequency: 0f, waveAmplitude: 0f, fallSpeed: 4f);
+            yield return new WaitForSeconds(0.05f);
+            SpawnVirus(columnIndex+offset, waveFrequency: 0f, waveAmplitude: 0f, fallSpeed: 4f);
+            yield return new WaitForSeconds(0.05f);
+            SpawnVirus(columnIndex+offset, waveFrequency: 0f, waveAmplitude: 0f, fallSpeed: 4f);
+            yield return new WaitForSeconds(0.05f);
         }
     }
     //add so the column wave feels more like asgore

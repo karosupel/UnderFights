@@ -20,6 +20,8 @@ public class HealthScript : MonoBehaviour, IDamageable
     [SerializeField] public Stats stats;
 
     CinemachineImpulseSource impulseSource;
+
+    public bool isPoisoned = false;
     
     void Start()
     {
@@ -101,5 +103,24 @@ public class HealthScript : MonoBehaviour, IDamageable
 
         slider.value = newHealth; // Ensure it ends at the exact value
         animationFinished = true;
+    }
+
+    public void PoisonPlayer(float damagePerSecond, float duration)
+    {
+        isPoisoned = true;
+        StartCoroutine(PoisonCoroutine(damagePerSecond, duration));
+    }
+
+    IEnumerator PoisonCoroutine(float damagePerSecond, float duration)
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            TakeDamage(damagePerSecond);
+            elapsedTime += 1;
+            yield return new WaitForSeconds(1f);
+        }
+        isPoisoned = false;
     }
 }

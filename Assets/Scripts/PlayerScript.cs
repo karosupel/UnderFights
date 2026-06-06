@@ -47,11 +47,12 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    void OnCollisionExit2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Box")
+        if(collision.gameObject.tag == "Poison" && healthScript.isPoisoned==false)
         {
-            impulseSource.enabled = true;
+            Debug.Log("Player poisoned!");
+            healthScript.PoisonPlayer(damagePerSecond: 5f, duration: 5f);
         }
     }
 
