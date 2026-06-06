@@ -6,13 +6,13 @@ public class RatAttacksScript : MonoBehaviour
 {
     WarningZonesScript warningZonesScript;
 
-    [Header("First Attack")]
+    [Header("Spinning Attack")]
     [SerializeField] public GameObject SpiningGameObject; //virus will have a toxic effect on the player, making them take damage over time (player turning green)
     [SerializeField] float spinningSpeed;
     [SerializeField] int spins;
     private bool coroutineRunning = false;
 
-    [Header("Second Attack")]
+    [Header("Virus Attack")]
 
     [SerializeField] public GameObject virusPrefab;
     [SerializeField] List<float> virusSpawnX;
@@ -23,6 +23,11 @@ public class RatAttacksScript : MonoBehaviour
 
     [SerializeField] float columnIndex;
     [SerializeField] int columnWaves;
+
+    [Header("Cheese Attack")]
+    [SerializeField] GameObject cheesePrefab;
+    [SerializeField] float speed;
+    [SerializeField] List<Vector2> cheeseSpawnPositions;
 
     
     void Start()
@@ -43,6 +48,10 @@ public class RatAttacksScript : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.H))
         {
             StartCoroutine(VirusColumnAttack(columnIndex, columnWaves));
+        }
+        if(Input.GetKeyDown(KeyCode.J))
+        {
+            StartCoroutine(CheeseAttack());
         }
     }
 
@@ -154,5 +163,28 @@ public class RatAttacksScript : MonoBehaviour
             SpawnVirus(columnIndex+offset, waveFrequency: 0f, waveAmplitude: 0f, fallSpeed: 4f);
             yield return new WaitForSeconds(0.05f);
         }
+    }
+
+    IEnumerator CheeseAttack()
+    {
+        List<float> timeOffsets = new List<float>() {0f, 0.99f, 0.5f};
+        foreach(Vector2 position in cheeseSpawnPositions)
+        {
+            warningZonesScript.ShowWarningZone(position, new Vector2(0.5f, 3f));
+        }
+        yield return new WaitForSeconds(1f);
+        for(int i = 0; i < cheeseSpawnPositions.Count; i++)
+        {
+            SpawnCheese(cheeseSpawnPositions[i], speed, lifetime: 5f, timeOffset: timeOffsets[i]);
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+    void SpawnCheese(Vector2 position, float speed, float lifetime, float timeOffset = 0f)
+    {
+        GameObject cheese =Instantiate(cheesePrefab, position, Quaternion.identity);
+        cheese.GetComponent<CheeseScript>().speed = speed;
+        cheese.GetComponent<CheeseScript>().lifetime = lifetime;
+        cheese.GetComponent<CheeseScript>().timeOffset = timeOffset;
     }
 }

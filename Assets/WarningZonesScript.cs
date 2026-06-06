@@ -5,18 +5,21 @@ using UnityEngine;
 public class WarningZonesScript : MonoBehaviour
 {
     [SerializeField] public GameObject warningZonePrefab;
+    public bool isWarningZoneActive = false;
     
 
     public void ShowWarningZone(Vector2 position, Vector2 size)
     {
-        GameObject warningZone = Instantiate(warningZonePrefab, position, Quaternion.identity);
-        warningZone.GetComponent<SpriteRenderer>().size = size;
-        StartCoroutine(CloseWarningZone(warningZone, duration: 1f));
+        StartCoroutine(ShowWarningZoneCoroutine(position, size, 1f));
     }
 
-    IEnumerator CloseWarningZone(GameObject warningZone, float duration)
+    IEnumerator ShowWarningZoneCoroutine(Vector2 position, Vector2 size, float duration)
     {
+        isWarningZoneActive = true;
+        GameObject warningZone = Instantiate(warningZonePrefab, position, Quaternion.identity);
+        warningZone.GetComponent<SpriteRenderer>().size = size;
         yield return new WaitForSeconds(duration);
         Destroy(warningZone);
+        isWarningZoneActive = false;
     }
 }

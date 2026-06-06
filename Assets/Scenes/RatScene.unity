@@ -1086,6 +1086,12 @@ MonoBehaviour:
   virusWaves: 3
   columnIndex: 2.5
   columnWaves: 10
+  cheesePrefab: {fileID: 3394907460098383332, guid: 398c3d9fbeb532c4982c9652329fe543, type: 3}
+  speed: 3
+  cheeseSpawnPositions:
+  - {x: -1, y: -1}
+  - {x: 0, y: -1}
+  - {x: 1, y: -1}
 --- !u!114 &1589191518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1099,6 +1105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   warningZonePrefab: {fileID: 3666271149268319821, guid: e341e303a45c06a4ca3f7e6f80b73ad5, type: 3}
+  isWarningZoneActive: 0
 --- !u!1 &1624676773
 GameObject:
   m_ObjectHideFlags: 0
