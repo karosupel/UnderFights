@@ -48,6 +48,7 @@ public class MainManagerScript : MonoBehaviour
 
     [Header("UI Events")]
     [SerializeField] Button fightButton;
+    [SerializeField] Canvas MainCanvas;
     void Awake()
     {
         if(Instance == null)
@@ -115,6 +116,7 @@ public class MainManagerScript : MonoBehaviour
         yield return new WaitForSeconds(transitionDuration);
 
         MainPanel.SetActive(true);
+        MainCanvas.GetComponent<CanvasGroup>().interactable = true;
         EventSystem.current.SetSelectedGameObject(fightButton.gameObject);
         typingScript.dialogueText = MainPanelText;
         typingScript.StartTyping(Text);
@@ -137,6 +139,7 @@ public class MainManagerScript : MonoBehaviour
         DamagePanel.SetActive(false);
         ItemPanel.SetActive(false);
         MainPanel.SetActive(false);
+        MainCanvas.GetComponent<CanvasGroup>().interactable = false;
         StartCoroutine(DelayedFightStart());
     }
 
