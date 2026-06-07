@@ -17,6 +17,7 @@ public class ShockwaveAttack : IAttack
 
     public IEnumerator Execute()
     {
+        MainManagerScript.Instance.boxScript.Resize(MainManagerScript.Instance.f_panel_position, new Vector2(1.2f, 0.7f));
         yield return purin.SchockwaveAttack(amount, delay);
     }
 }

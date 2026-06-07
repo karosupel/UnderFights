@@ -116,11 +116,11 @@ public class PurinAttacksScript : MonoBehaviour
     List<float> holePositions = new List<float>();
     public IEnumerator SchockwaveAttack(int numberOfAttacks, float timeBetweenAttacks )
     {
-        MainManagerScript.Instance.boxScript.Resize(MainManagerScript.Instance.f_panel_position, new Vector2(1.2f, 0.7f));
+        //MainManagerScript.Instance.boxScript.Resize(MainManagerScript.Instance.f_panel_position, new Vector2(1.2f, 0.7f));
         for(int i=0; i<numberOfAttacks; i++)
         {
             Vector3 spawnPoint = new Vector3(transform.position.x,transform.position.y-2,0);
-            GeneratePositions(holePositions, 0.5f, 0.1f);
+            GeneratePositions(holePositions, 0.5f, 0.1f, numberOfAttacks);
             HoleStart = holePositions[i];
             HoleEnd = HoleStart + holeLength;
             shockwaveScript.mat.SetFloat("_HoleStart", HoleStart);
@@ -131,7 +131,7 @@ public class PurinAttacksScript : MonoBehaviour
         }
     }
 
-    void GeneratePositions(List<float> positions, float start, float step) //shuffle random
+    void GeneratePositions(List<float> positions, float start, float step, int numberOfAttacks) //shuffle random
     {
         positions.Clear();
         
@@ -155,7 +155,7 @@ public class PurinAttacksScript : MonoBehaviour
     public IEnumerator ExplosionAttack(int amoutOfBigFood, int amountOfMiniFood)
     {
         List<float> spawnPositionsX = new List<float>();
-        GeneratePositions(spawnPositionsX, xMinSpawn, 0.5f);
+        GeneratePositions(spawnPositionsX, xMinSpawn, 0.5f, amoutOfBigFood);
 
         for(int i = 0; i < amoutOfBigFood; i++)
         {
