@@ -167,23 +167,25 @@ public class RatAttacksScript : MonoBehaviour
 
     IEnumerator CheeseAttack()
     {
+        MainManagerScript.Instance.boxScript.Resize(MainManagerScript.Instance.f_panel_position, new Vector2(0.52f, 0.71f));
         foreach (Vector2 position in cheeseSpawnPositions)
         {
-            warningZonesScript.ShowWarningZone(position, new Vector2(1f, 1f));
+            warningZonesScript.ShowWarningZone(position, new Vector2(0.5f, 2f));
             yield return new WaitForSeconds(1f);
-            SpawnCheese(position, speed, lifetime: 5f);
+            SpawnCheese(position, speed, lifetime: 5f, height: 4f);
             yield return new WaitForSeconds(0.3f);
         }
         //add warning zone at each fall not just the start
         //add parameters
-        //box resize this attack
     }
 
-    void SpawnCheese(Vector2 position, float speed, float lifetime, float timeOffset = 0f)
+    void SpawnCheese(Vector2 position, float speed, float lifetime, float timeOffset = 0f, float height = 4f)
     {
         GameObject cheese =Instantiate(cheesePrefab, position, Quaternion.identity);
         cheese.GetComponent<CheeseScript>().speed = speed;
         cheese.GetComponent<CheeseScript>().lifetime = lifetime;
         cheese.GetComponent<CheeseScript>().timeOffset = timeOffset;
+        cheese.GetComponent<CheeseScript>().height = height;
+
     }
 }

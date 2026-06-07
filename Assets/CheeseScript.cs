@@ -10,6 +10,8 @@ public class CheeseScript : MonoBehaviour
     Vector2 startPosition;
     public float speed = 2f;
 
+    public float height = 4f;
+
     public float lifetime = 5f; 
 
     public float timeOffset;
@@ -28,7 +30,7 @@ public class CheeseScript : MonoBehaviour
 
         transform.position = Vector3.Lerp(
             startPosition,
-            startPosition + Vector2.down * 2f,
+            startPosition + Vector2.down * height,
             cheeseCurve.Evaluate(t)
         );
     }
