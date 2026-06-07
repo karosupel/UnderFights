@@ -15,6 +15,7 @@ public class CheeseScript : MonoBehaviour
     public float lifetime = 5f; 
 
     public float timeOffset;
+
     // Start is called before the first frame update
     void Start()
     {

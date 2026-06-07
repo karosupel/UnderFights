@@ -170,12 +170,11 @@ public class RatAttacksScript : MonoBehaviour
         MainManagerScript.Instance.boxScript.Resize(MainManagerScript.Instance.f_panel_position, new Vector2(0.52f, 0.71f));
         foreach (Vector2 position in cheeseSpawnPositions)
         {
-            warningZonesScript.ShowWarningZone(position, new Vector2(0.5f, 2f));
+            warningZonesScript.ShowWarningZone(position - new Vector2(0f,2f), new Vector2(0.5f, 2.5f));
             yield return new WaitForSeconds(1f);
             SpawnCheese(position, speed, lifetime: 5f, height: 4f);
             yield return new WaitForSeconds(0.3f);
         }
-        //add warning zone at each fall not just the start
         //add parameters
     }
 
