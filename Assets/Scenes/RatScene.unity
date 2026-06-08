@@ -1074,6 +1074,7 @@ MonoBehaviour:
   SpiningGameObject: {fileID: 3073024468066777948, guid: 9c9fe7bed0ff55a4fbc498d4a9c6b967, type: 3}
   spinningSpeed: -70
   spins: 2
+  angleWhenColumnSpawns: 120
   virusPrefab: {fileID: 5680351163530246983, guid: dea1c33f829ee324aaec3c494fea3fd3, type: 3}
   virusSpawnX:
   - -3
@@ -1085,8 +1086,8 @@ MonoBehaviour:
   - 3
   virusSpawnY: 1.8
   virusWaves: 3
-  columnIndex: 2.5
-  columnWaves: 10
+  columnIndex: 2.2
+  columnWaves: 6
   cheesePrefab: {fileID: 3394907460098383332, guid: 398c3d9fbeb532c4982c9652329fe543, type: 3}
   speed: 3
   cheeseSpawnPositions:

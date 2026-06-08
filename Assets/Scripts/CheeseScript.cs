@@ -16,6 +16,8 @@ public class CheeseScript : MonoBehaviour
 
     public float timeOffset;
 
+    public float damage = 10f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,5 +36,13 @@ public class CheeseScript : MonoBehaviour
             startPosition + Vector2.down * height,
             cheeseCurve.Evaluate(t)
         );
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Player"))
+        {
+            collision.GetComponent<HealthScript>().TakeDamage(damage);
+        }
     }
 }
