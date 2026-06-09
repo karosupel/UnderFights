@@ -21,6 +21,11 @@ public class RatAttacksScript : MonoBehaviour
     [SerializeField] float virusSpawnY;
     [SerializeField] int virusWaves;
 
+    [SerializeField] float virusWaveFrequency;
+    [SerializeField] float virusWaveAmplitude;
+    [SerializeField] float virusFallSpeed;
+    [SerializeField] float virusLifetime;
+
     [Header("Column Attack")]
 
     [SerializeField] float columnIndex;
@@ -29,6 +34,9 @@ public class RatAttacksScript : MonoBehaviour
     [Header("Cheese Attack")]
     [SerializeField] GameObject cheesePrefab;
     [SerializeField] float speed;
+    [SerializeField] float lifetime;
+    [SerializeField] float timeOffset;
+    [SerializeField] float height;
     [SerializeField] List<Vector2> cheeseSpawnPositions;
 
     
@@ -41,7 +49,7 @@ public class RatAttacksScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            StartCoroutine(SpinningAttack());
+            StartCoroutine(SpinningAttack(spinningSpeed, spins, angleWhenColumnSpawns));
         }
         if(Input.GetKeyDown(KeyCode.G))
         {
@@ -53,7 +61,7 @@ public class RatAttacksScript : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.J))
         {
-            StartCoroutine(CheeseAttack());
+            StartCoroutine(CheeseAttack(speed, lifetime));
         }
     }
 
@@ -115,15 +123,13 @@ public class RatAttacksScript : MonoBehaviour
         spinningSpeed = -spinningSpeed;
     }
 
-    IEnumerator SpinningAttack()
+    public IEnumerator SpinningAttack(float spinningSpeed, int spins, float angleWhenColumnSpawns)
     {
         warningZonesScript.ShowWarningZone(MainManagerScript.Instance.box.transform.position, new Vector2(3f, 1f));
         warningZonesScript.ShowWarningZone(MainManagerScript.Instance.box.transform.position, new Vector2(1f, 3f));
         yield return new WaitForSeconds(1f);
-        StartCoroutine(SpinCoroutine(spinningSpeed, 2, angleWhenColumnSpawns));
-        //yield return new WaitUntil(() => !coroutineRunning);
-        //ChangeSpinDirection();
-        //StartCoroutine(SpinCoroutine(spinningSpeed, 1, angleWhenColumnSpawns));
+        StartCoroutine(SpinCoroutine(spinningSpeed, spins, angleWhenColumnSpawns));
+        yield return new WaitUntil(() => !coroutineRunning);
     }
 
     void SpawnVirus(float x, float waveFrequency = 2f, float waveAmplitude = 2.1f, float fallSpeed = 2f, float lifetime = 5f)
@@ -136,25 +142,25 @@ public class RatAttacksScript : MonoBehaviour
         virusScript.lifetime = lifetime;
     }
 
-    IEnumerator SpawnVirusWave(int currentHole)
+    IEnumerator SpawnVirusWave(int currentHole, float waveFrequency = 2f, float waveAmplitude = 2.1f, float fallSpeed = 2f, float lifetime = 5f)
     {
         foreach(float x in virusSpawnX)
         {
             if (x != currentHole)
             {
-                SpawnVirus(x);
+                SpawnVirus(x, waveFrequency, waveAmplitude, fallSpeed, lifetime);
             }
             yield return new WaitForSeconds(0.1f);
         }
     }
 
-    IEnumerator VirusSinAttack(int waves)
+    public IEnumerator VirusSinAttack(int waves, float waveFrequency = 2f, float waveAmplitude = 2.1f, float fallSpeed = 2f, float lifetime = 5f)
     {
         MainManagerScript.Instance.boxScript.Resize(MainManagerScript.Instance.f_panel_position, new Vector2(0.5f, 0.7f));
         int currentHole = Random.Range(0, virusSpawnX.Count);
         for (int i = 0; i < waves; i++)
         {
-            StartCoroutine(SpawnVirusWave(currentHole));
+            StartCoroutine(SpawnVirusWave(currentHole, waveFrequency, waveAmplitude, fallSpeed, lifetime));
             yield return new WaitForSeconds(1f);
             currentHole += 1;
             if (currentHole >= virusSpawnX.Count)
@@ -180,14 +186,14 @@ public class RatAttacksScript : MonoBehaviour
         }
     }
 
-    IEnumerator CheeseAttack()
+    public IEnumerator CheeseAttack(float speed, float lifetime)
     {
         MainManagerScript.Instance.boxScript.Resize(MainManagerScript.Instance.f_panel_position, new Vector2(0.52f, 0.71f));
         foreach (Vector2 position in cheeseSpawnPositions)
         {
             warningZonesScript.ShowWarningZone(position - new Vector2(0f,2f), new Vector2(0.5f, 2.5f));
             yield return new WaitForSeconds(1f);
-            SpawnCheese(position, speed, lifetime: 5f, height: 4f);
+            SpawnCheese(position, speed, lifetime: lifetime);
             yield return new WaitForSeconds(0.3f);
         }
         //add parameters

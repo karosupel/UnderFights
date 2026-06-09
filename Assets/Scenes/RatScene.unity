@@ -182,8 +182,8 @@ MonoBehaviour:
   OnFightStart:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PurinFightScript, Assembly-CSharp
+      - m_Target: {fileID: 1589191516}
+        m_TargetAssemblyTypeName: RatFightScript, Assembly-CSharp
         m_MethodName: StartFight
         m_Mode: 1
         m_Arguments:
@@ -1059,6 +1059,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e91ab0b46d725da43ae776e78c7804eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackIndex: 0
+  spinningSpeed: 70
+  spins: 2
+  angleWhenColumnSpawns: 180
+  virusWaves: 3
+  virusWaveFrequency: 1.5
+  cheeseSpeed: 3
+  cheeseLifetime: 5
 --- !u!114 &1589191517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1072,9 +1080,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpiningGameObject: {fileID: 3073024468066777948, guid: 9c9fe7bed0ff55a4fbc498d4a9c6b967, type: 3}
-  spinningSpeed: -70
+  spinningSpeed: 70
   spins: 2
-  angleWhenColumnSpawns: 120
+  angleWhenColumnSpawns: 180
   virusPrefab: {fileID: 5680351163530246983, guid: dea1c33f829ee324aaec3c494fea3fd3, type: 3}
   virusSpawnX:
   - -3
@@ -1086,10 +1094,17 @@ MonoBehaviour:
   - 3
   virusSpawnY: 1.8
   virusWaves: 3
+  virusWaveFrequency: 1.5
+  virusWaveAmplitude: 2.1
+  virusFallSpeed: 2
+  virusLifetime: 5
   columnIndex: 2.2
   columnWaves: 6
   cheesePrefab: {fileID: 3394907460098383332, guid: 398c3d9fbeb532c4982c9652329fe543, type: 3}
   speed: 3
+  lifetime: 5
+  timeOffset: 0
+  height: 4
   cheeseSpawnPositions:
   - {x: -1, y: 1}
   - {x: 0, y: 1}
