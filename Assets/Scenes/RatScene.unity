@@ -1059,6 +1059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e91ab0b46d725da43ae776e78c7804eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthScript: {fileID: 0}
   attackIndex: 0
   spinningSpeed: 70
   spins: 2
@@ -1094,7 +1095,7 @@ MonoBehaviour:
   - 3
   virusSpawnY: 1.8
   virusWaves: 3
-  virusWaveFrequency: 1.5
+  virusWaveFrequency: 1
   virusWaveAmplitude: 2.1
   virusFallSpeed: 2
   virusLifetime: 5

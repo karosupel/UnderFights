@@ -168,6 +168,7 @@ public class RatAttacksScript : MonoBehaviour
                 currentHole = 0;
             }
         }
+        yield return new WaitForSeconds(lifetime-1.6f);
     }
 
     IEnumerator VirusColumnAttack(float columnIndex, int waves)
@@ -196,7 +197,7 @@ public class RatAttacksScript : MonoBehaviour
             SpawnCheese(position, speed, lifetime: lifetime);
             yield return new WaitForSeconds(0.3f);
         }
-        //add parameters
+        yield return new WaitForSeconds(lifetime-1.6f);
     }
 
     void SpawnCheese(Vector2 position, float speed, float lifetime, float timeOffset = 0f, float height = 4f)
