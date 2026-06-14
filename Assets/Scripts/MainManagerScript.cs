@@ -49,6 +49,9 @@ public class MainManagerScript : MonoBehaviour
     [Header("UI Events")]
     [SerializeField] Button fightButton;
     [SerializeField] Canvas MainCanvas;
+
+    [SerializeField] GameObject DeathPanel;
+    [SerializeField] GameObject WinScreen;
     void Awake()
     {
         if(Instance == null)
@@ -65,6 +68,7 @@ public class MainManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1f;
         boxScript = box.GetComponent<BoxScript>();
         damagePanelScript = DamagePanel.GetComponent<DamagePanelScript>();
         typingScript = GetComponent<TypingScript>();
@@ -166,5 +170,17 @@ public class MainManagerScript : MonoBehaviour
         boxScript.Resize(panel_position, panel_size);
         MainPanel.SetActive(false);
         ItemPanel.SetActive(true);
+    }
+
+    public void GameOver()
+    {
+        Time.timeScale = 0f;
+        DeathPanel.SetActive(true);
+    }
+
+    public void YouveWon()
+    {
+        Time.timeScale = 0f;
+        WinScreen.SetActive(true);
     }
 }

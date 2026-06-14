@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using JetBrains.Annotations;
 using Cinemachine;
+using UnityEngine.Events;
 
 public class HealthScript : MonoBehaviour, IDamageable
 {
@@ -22,6 +23,8 @@ public class HealthScript : MonoBehaviour, IDamageable
     CinemachineImpulseSource impulseSource;
 
     public bool isPoisoned = false;
+
+    public UnityEvent OnDeath;
     
     void Start()
     {
@@ -62,6 +65,11 @@ public class HealthScript : MonoBehaviour, IDamageable
         {
             hpValueText.text = health.ToString();
             SmoothSliderUpdate(health);
+        }
+        if(health <= 0)
+        {
+            health = 0;
+            OnDeath?.Invoke();
         }
     }
 
