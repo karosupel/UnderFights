@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainManagerScript : MonoBehaviour
 {
@@ -79,7 +80,18 @@ public class MainManagerScript : MonoBehaviour
         DamagePanel.SetActive(false);
         boxScript.Resize(panel_position, panel_size);
         player.SetActive(false);
-        typingScript.StartTyping("* The air is filled with the smell of pudding");
+        if(SceneManager.GetActiveScene().name == "PurinScene")
+        {
+            typingScript.StartTyping("* The air is filled with the smell of pudding");
+        }
+        else if (SceneManager.GetActiveScene().name == "RatScene")
+        {
+            typingScript.StartTyping("* Big rat blocks your way");
+        }
+        else if (SceneManager.GetActiveScene().name == "TutorialScene")
+        {
+            typingScript.StartTyping(" ");
+        }
     }
 
     // Update is called once per frame
