@@ -53,6 +53,7 @@ public class MainManagerScript : MonoBehaviour
 
     [SerializeField] GameObject DeathPanel;
     [SerializeField] GameObject WinScreen;
+
     void Awake()
     {
         if(Instance == null)

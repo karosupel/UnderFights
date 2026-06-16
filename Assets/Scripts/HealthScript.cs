@@ -14,6 +14,7 @@ public class HealthScript : MonoBehaviour, IDamageable
     //to delete this later v
     public float health;
     public Slider slider;
+    public GameObject sliderCanvas;
     public TextMeshProUGUI hpValueText;
 
     public bool animationFinished = false;
@@ -63,6 +64,7 @@ public class HealthScript : MonoBehaviour, IDamageable
         }
         else
         {
+            sliderCanvas.SetActive(true);
             hpValueText.text = health.ToString();
             SmoothSliderUpdate(health);
         }
@@ -111,6 +113,8 @@ public class HealthScript : MonoBehaviour, IDamageable
 
         slider.value = newHealth; // Ensure it ends at the exact value
         animationFinished = true;
+        yield return new WaitForSeconds(0.5f);
+        sliderCanvas.SetActive(false);
     }
 
     public void PoisonPlayer(float damagePerSecond, float duration)
