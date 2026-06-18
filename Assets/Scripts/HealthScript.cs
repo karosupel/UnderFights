@@ -17,6 +17,8 @@ public class HealthScript : MonoBehaviour, IDamageable
     public GameObject sliderCanvas;
     public TextMeshProUGUI hpValueText;
 
+    public Animator? animator;
+
     public bool animationFinished = false;
 
     [SerializeField] public Stats stats;
@@ -34,6 +36,10 @@ public class HealthScript : MonoBehaviour, IDamageable
         slider.maxValue = maxHealth;
         slider.value = health;
         impulseSource = GetComponent<CinemachineImpulseSource>();
+        if(animator != null)
+        {
+            animator = GetComponent<Animator>();
+        }
         if(gameObject.tag=="Player")
         {
             hpValueText.text = health.ToString() + "/" + maxHealth.ToString();
@@ -56,24 +62,54 @@ public class HealthScript : MonoBehaviour, IDamageable
     public void TakeDamage(float amount)
     {
         health -= amount;
-        if(gameObject.tag=="Player")
+        if(health <= 0)
+        {
+            health = 0;
+            OnDeath?.Invoke();
+            if(gameObject.tag == "Player")
+            {
+                //help me
+            }
+            else
+            {
+                sliderCanvas.SetActive(true);
+                hpValueText.text = health.ToString();
+                SmoothSliderUpdate(health);
+            }
+        }
+        else if(gameObject.tag=="Player")
         {
             hpValueText.text = health.ToString() + "/" + maxHealth.ToString();
             slider.value = health;
             CinemashineManager.Instance.CameraShake(impulseSource);
             gameObject.GetComponent<ParticleSystem>().Play();
         }
-        else
+        else if (gameObject.tag!="Player")
         {
+            animator.SetBool("isDamaged",true);
             sliderCanvas.SetActive(true);
             hpValueText.text = health.ToString();
             SmoothSliderUpdate(health);
+            StartCoroutine(LetAnimationFinish(1f));
         }
-        if(health <= 0)
-        {
-            health = 0;
-            OnDeath?.Invoke();
-        }
+    }
+
+    public void PlayDeathAnimation()
+    {
+        StartCoroutine(DeathAnimation(1.8f));
+    }
+
+    IEnumerator DeathAnimation(float time)
+    {
+        animator.SetBool("isDead",true);
+        yield return new WaitForSeconds(time);
+        MainManagerScript.Instance.YouveWon();
+    }
+
+    IEnumerator LetAnimationFinish(float time)
+    {
+        yield return new WaitForSeconds(time);
+        animator.SetBool("isDamaged",false);
     }
 
     public void Heal(float amount)
