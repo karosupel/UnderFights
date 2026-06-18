@@ -38,4 +38,9 @@ public class ButtonsLogicScript : MonoBehaviour
     {
         MainMenuScript.Instance.Exit();
     }
+
+    public void ReloadScene()
+    {
+        MainMenuScript.Instance.ReloadScene();
+    }
 }
