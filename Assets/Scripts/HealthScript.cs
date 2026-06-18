@@ -61,6 +61,7 @@ public class HealthScript : MonoBehaviour, IDamageable
             hpValueText.text = health.ToString() + "/" + maxHealth.ToString();
             slider.value = health;
             CinemashineManager.Instance.CameraShake(impulseSource);
+            gameObject.GetComponent<ParticleSystem>().Play();
         }
         else
         {
