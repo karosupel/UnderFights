@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 226176048}
   - component: {fileID: 226176047}
   - component: {fileID: 226176049}
+  - component: {fileID: 226176050}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -183,8 +184,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0.7783019, b: 0.89252543, a: 1}
+  m_Sprite: {fileID: 986162070, guid: 19e20e08f21d98946a16d30ae5b1cddd, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -204,7 +205,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.01, y: 4.36, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 8, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 944963863}
@@ -276,15 +277,18 @@ MonoBehaviour:
   slider: {fileID: 1788166684}
   sliderCanvas: {fileID: 1264243971}
   hpValueText: {fileID: 1090179451}
+  animator: {fileID: 226176050}
+  damageAnimationTime: 1
+  deathAnimationTime: 1.2
   animationFinished: 0
   stats: {fileID: 11400000, guid: df314bb32d6bbd04794825ac094e7049, type: 2}
   isPoisoned: 0
   OnDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 496362357}
-        m_TargetAssemblyTypeName: MainManagerScript, Assembly-CSharp
-        m_MethodName: YouveWon
+      - m_Target: {fileID: 226176049}
+        m_TargetAssemblyTypeName: HealthScript, Assembly-CSharp
+        m_MethodName: PlayDeathAnimation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -294,6 +298,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!95 &226176050
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226176044}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2b92440ba67c5ba4ea4794f2bd655735, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &264396237
 GameObject:
   m_ObjectHideFlags: 0

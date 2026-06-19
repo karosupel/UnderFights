@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e231bd7c873c45146816b79e96b5a9a4, type: 3}
   m_Name: RatStats
   m_EditorClassIdentifier: 
-  health: 20
+  health: 220
   attack: 15
   defense: 20

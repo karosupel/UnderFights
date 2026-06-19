@@ -1494,6 +1494,7 @@ GameObject:
   - component: {fileID: 1589191515}
   - component: {fileID: 1589191516}
   - component: {fileID: 1589191517}
+  - component: {fileID: 1589191518}
   m_Layer: 0
   m_Name: PonPonPurin
   m_TagString: Enemy
@@ -1542,7 +1543,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 647353284, guid: 7df350542efb47f40862e1b6e6e24f82, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1563,7 +1564,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 4.38, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 9, y: 9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1084481144}
@@ -1586,15 +1587,18 @@ MonoBehaviour:
   slider: {fileID: 1624676775}
   sliderCanvas: {fileID: 1084481140}
   hpValueText: {fileID: 1075085390}
+  animator: {fileID: 1589191518}
+  damageAnimationTime: 0.75
+  deathAnimationTime: 1.2
   animationFinished: 0
   stats: {fileID: 11400000, guid: 66c6751b9dc848b4c9fc16526370c21f, type: 2}
   isPoisoned: 0
   OnDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 496362357}
-        m_TargetAssemblyTypeName: MainManagerScript, Assembly-CSharp
-        m_MethodName: YouveWon
+      - m_Target: {fileID: 1589191515}
+        m_TargetAssemblyTypeName: HealthScript, Assembly-CSharp
+        m_MethodName: PlayDeathAnimation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1656,6 +1660,27 @@ MonoBehaviour:
   timeBetweenAttacks: 1
   amoutOfBigFood: 3
   amountOfMiniFood: 5
+--- !u!95 &1589191518
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589191512}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 46def607aeabb8a43bef4093d2d20c34, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1624676773
 GameObject:
   m_ObjectHideFlags: 0

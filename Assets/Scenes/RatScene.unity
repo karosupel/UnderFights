@@ -1066,6 +1066,8 @@ MonoBehaviour:
   sliderCanvas: {fileID: 1084481140}
   hpValueText: {fileID: 1075085390}
   animator: {fileID: 1589191519}
+  damageAnimationTime: 1
+  deathAnimationTime: 1.8
   animationFinished: 0
   stats: {fileID: 11400000, guid: 1130c35ab1ec7dc4cb986e1b06158dd7, type: 2}
   isPoisoned: 0

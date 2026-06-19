@@ -18,6 +18,8 @@ public class HealthScript : MonoBehaviour, IDamageable
     public TextMeshProUGUI hpValueText;
 
     public Animator? animator;
+    public float damageAnimationTime;
+    public float deathAnimationTime;
 
     public bool animationFinished = false;
 
@@ -90,13 +92,13 @@ public class HealthScript : MonoBehaviour, IDamageable
             sliderCanvas.SetActive(true);
             hpValueText.text = health.ToString();
             SmoothSliderUpdate(health);
-            StartCoroutine(LetAnimationFinish(1f));
+            StartCoroutine(LetAnimationFinish(damageAnimationTime));
         }
     }
 
     public void PlayDeathAnimation()
     {
-        StartCoroutine(DeathAnimation(1.8f));
+        StartCoroutine(DeathAnimation(deathAnimationTime));
     }
 
     IEnumerator DeathAnimation(float time)
