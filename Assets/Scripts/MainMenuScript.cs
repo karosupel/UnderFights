@@ -72,6 +72,7 @@ public class MainMenuScript : MonoBehaviour
         {
             Debug.Log("bob");
             SceneManager.LoadScene(0);
+            MusicManagerScript.Instance.PlayBackgroundMusic(false, 0);
         }
         else
         {
@@ -87,6 +88,7 @@ public class MainMenuScript : MonoBehaviour
             visitedScenes.Add(1);
         }
         SceneManager.LoadScene(1);
+        MusicManagerScript.Instance.PlayBackgroundMusic(false, 1);
     }
 
     public void ToPurin()
@@ -96,6 +98,7 @@ public class MainMenuScript : MonoBehaviour
             visitedScenes.Add(2);
         }
         SceneManager.LoadScene(2);
+        MusicManagerScript.Instance.PlayBackgroundMusic(false, 2);
     }
 
     public void ToRat()
@@ -105,6 +108,7 @@ public class MainMenuScript : MonoBehaviour
             visitedScenes.Add(3);
         }
         SceneManager.LoadScene(3);
+        MusicManagerScript.Instance.PlayBackgroundMusic(false, 3);
     }
 
     public void NextScene()

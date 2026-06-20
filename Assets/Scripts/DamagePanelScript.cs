@@ -75,7 +75,7 @@ public class DamagePanelScript : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse0) && gameObject.activeSelf)
+        if(Input.anyKeyDown && gameObject.activeSelf)
         {
             Debug.Log("Multiplier: " + GetMultiplier());
             float player_attack = MainManagerScript.Instance.player.GetComponent<HealthScript>().stats.attack;

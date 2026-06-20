@@ -85,9 +85,11 @@ public class HealthScript : MonoBehaviour, IDamageable
             slider.value = health;
             CinemashineManager.Instance.CameraShake(impulseSource);
             gameObject.GetComponent<ParticleSystem>().Play();
+            AudioManagerScript.Instance.PlaySFX("hit");
         }
         else if (gameObject.tag!="Player")
         {
+            AudioManagerScript.Instance.PlaySFX("hit");
             animator.SetBool("isDamaged",true);
             sliderCanvas.SetActive(true);
             hpValueText.text = health.ToString();
@@ -98,6 +100,7 @@ public class HealthScript : MonoBehaviour, IDamageable
 
     public void PlayDeathAnimation()
     {
+        AudioManagerScript.Instance.PlaySFX("death");
         StartCoroutine(DeathAnimation(deathAnimationTime));
     }
 
