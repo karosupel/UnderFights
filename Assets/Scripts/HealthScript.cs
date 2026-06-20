@@ -162,6 +162,7 @@ public class HealthScript : MonoBehaviour, IDamageable
     public void PoisonPlayer(float damagePerSecond, float duration)
     {
         isPoisoned = true;
+        gameObject.GetComponent<SpriteRenderer>().color = Color.green;
         StartCoroutine(PoisonCoroutine(damagePerSecond, duration));
     }
 
@@ -176,5 +177,6 @@ public class HealthScript : MonoBehaviour, IDamageable
             yield return new WaitForSeconds(1f);
         }
         isPoisoned = false;
+        gameObject.GetComponent<SpriteRenderer>().color = Color.red;
     }
 }
